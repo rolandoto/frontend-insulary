@@ -289,14 +289,14 @@ const GetRefrestToken = async () => {
 
   const LoginUser = async ({ email, password }) => {
     try {
-        const resp = await fetch(`${config.serverRoute}/api/admin/login`, {
-          method: "POST",
-          body: JSON.stringify({ email, password }),
-          headers: {
-              'Content-type': 'application/json',
-          },
-        credentials: "include"
-        });
+      const resp = await fetch(`${config.serverRoute}/api/admin/login`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+        credentials: "include" // ✅ DEBE estar aquí, no fuera
+      });
         if (!resp.ok) {
           
           throw new Error('Response is not ok');

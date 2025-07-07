@@ -15,7 +15,7 @@ const UseUsers =() =>{
             console.log(index)
             setJwt(true);
             setState({ loading: false, error: false }); // ✅ loading en false
-           window.location.reload()
+        
           })
           .catch(() => {
             setState({ loading: false, error: true });
