@@ -12,10 +12,10 @@ const UseUsers =() =>{
       
         Httpclient.LoginUser({ email, password })
           .then((index) => {
-            console.log(index)
+    
             setJwt(true);
             setState({ loading: false, error: false }); // ✅ loading en false
-        
+           window.location.reload()
           })
           .catch(() => {
             setState({ loading: false, error: true });
