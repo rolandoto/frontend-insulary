@@ -1,4 +1,7 @@
 import clsx from 'clsx';
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { deleteCasos } from '../lib/actions';
+import { useSelector } from 'react-redux';
 
 export function Button({ children, className, ...rest }) {
   return (
@@ -9,5 +12,23 @@ export function Button({ children, className, ...rest }) {
         className)}>
       {children}
     </button>
+  );
+}
+
+
+
+export function DeleteCasos({ id }) {
+const { accessToken} = useSelector((state) => state.Refrestoken);  
+const deleteCasosWithId = deleteCasos.bind(null,id,accessToken);
+
+  return (
+    <>
+    <form  action={deleteCasosWithId} >
+        <button   type="submit" className="rounded-md cursor-pointer border border-gray-200 p-2 hover:bg-gray-100">
+          <span className="sr-only">Delete</span>
+          <RiDeleteBin5Line  fontSize={25} className="w-5" />
+        </button>
+      </form>
+    </>
   );
 }

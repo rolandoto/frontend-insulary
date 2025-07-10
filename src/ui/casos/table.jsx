@@ -7,6 +7,8 @@ import { UpdateCustomers } from "../customers/buttons";
 import { InvoicesTableSkeleton } from "../skeleton";
 import moment from "moment";
 import SemaforoEstado from "./Trafficlight";
+import { DeleteCasos } from "../button";
+import { Toaster } from "sonner";
 
 
 
@@ -32,6 +34,7 @@ export default  function Table({query,currentPage}) {
 
   return (
     <div className="mt-6 flow-root">
+        <Toaster richColors position="top-center" />
         <div className="mt-6 flow-root">
         <div className="inline-block min-w-full align-middle">
             <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
@@ -67,6 +70,7 @@ export default  function Table({query,currentPage}) {
                     </div>
                     <div className="flex justify-end gap-2">
                         <UpdateCustomers id={client.id} />
+                        <DeleteCasos id={client.id} />
                     </div>
                     </div>
                 </div>
@@ -127,34 +131,35 @@ export default  function Table({query,currentPage}) {
                         </div>
                     </td>
                     
-                    <td className="whitespace-nowrap px-3 py-3">
-                    {client.cliente}
+                   <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
+                     {client.cliente}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-3">
+                     <td  className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
                     {client.Intermediario}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-3">
+                    <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
                     {client.caso}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-3">
+                    <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
                     {client.poliza}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-3">
+                   <td  className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
                     {client.asegurado}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-3">
+                    <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
                     {client.siniestro}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-3">
+                    <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
                     {client.placa_asegurada}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-3">
+                    <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
                     {dateAsing}
                     </td>
                     <SemaforoEstado nombreEstado={client.estado} />
                     <td className="whitespace-nowrap py-3 pl-6 pr-3">
                         <div className="flex justify-end gap-3">
-                        <UpdateCustomers id={client.id} />
+                            <UpdateCustomers id={client.id} />
+                            <DeleteCasos id={client.id} />
                         </div>
                     </td>
                     </tr>

@@ -13,9 +13,7 @@ const CreateForm =() =>{
             {label: 'Crear cliente',href: '/dashboard/customers/create',active: true,},
             ]}
         />
-
         <Form />
-
         </Layout>
         </>
 

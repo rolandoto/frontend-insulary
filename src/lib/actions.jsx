@@ -20,8 +20,6 @@ const FormSchema = z.object({
   date: z.string(),
 });
 
-
-
 const CreateCustomers = FormSchema.omit({ id: true, date: true });
 
 export async function createCustomers(token,prevState, formData) {
@@ -81,7 +79,6 @@ export async function createCustomers(token,prevState, formData) {
 }
 
 }
-
 
 const UpdateCustomers = FormSchema.omit({ id: true, date: true });
 
@@ -145,10 +142,6 @@ export async function updateCustomers(id,token,prevState, formData) {
   }
   
   }
-
-
-
-
 
   const FormSchemaUsers = z.object({
     id: z.string(),
@@ -227,9 +220,6 @@ export async function updateCustomers(id,token,prevState, formData) {
 
   export async function updateUsers(id,token,prevState, formData) {
 
-
-
-
     const validatedFields = UpdatetUsers.safeParse({
       name: formData.get("name"),
       email: formData.get("email"),
@@ -277,7 +267,49 @@ export async function updateCustomers(id,token,prevState, formData) {
         data: responseData,
       }
 
-         
+    } catch (err) {
+
+      toast.error("Algo paso en el sistema")
+      return {
+          message:"error en el sistem"
+    }
+  }
+  
+  }
+
+  export async function deleteCasos(id,token) {
+    
+    try {
+      
+      const res = await fetch(`${config.serverRoute}/api/client/DeleteGetReportecasos`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`, // ← Aquí va el token correctamente
+        },
+        body: JSON.stringify({id}),
+      });
+    
+      const responseData = await res.json();
+    
+      if (!res.ok) {
+        toast.error(responseData.msg || 'Error al registrar cliente.');
+        return {
+          success: false,
+          message: responseData.msg || 'Error al registrar cliente.',
+          errors: responseData.errors,
+        };
+      }
+
+      toast.success("Caso eliminado correctamente");
+      window.location.reload()
+      return {
+        success: true,
+        message: "Cliente creado exitosamente",
+        data:"trye",
+      }
+
+      
     } catch (err) {
 
       toast.error("Algo paso en el sistema")
