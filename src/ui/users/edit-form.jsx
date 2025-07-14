@@ -3,8 +3,8 @@
 import { CiUser } from "react-icons/ci";
 import { Link, useParams } from "react-router";
 import { Button } from "../button";
-import { updateCustomers, updateUsers } from "../../lib/actions";
-import { useActionState, useEffect } from "react";
+import { updateUsers } from "../../lib/actions";
+import { useActionState } from "react";
 import { Toaster } from "sonner";
 import { useSelector } from "react-redux";
 import { HiOutlineUserCircle } from "react-icons/hi2";

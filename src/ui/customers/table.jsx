@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import ActionsClient from "../../Actions/ActionsClient";
 import { useSelector } from "react-redux";
-import { UpdateCustomers, UpdateInvoice } from "./buttons";
+import { UpdateCustomers } from "./buttons";
 import users  from "../../../public/customers/evil-rabbit.png"
 import { InvoicesTableSkeleton } from "../skeleton";
 

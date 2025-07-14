@@ -44,7 +44,6 @@ const Casos =() =>{
             </div>
   </div>
   }
-
     return <Layout>
               {fillCotent()}
             </Layout>

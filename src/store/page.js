@@ -3,6 +3,7 @@ import {clientSlice} from '../reducers/ApiClient';
 import {refresTokenslice} from '../reducers/ApiAuth';
 import {Casoslice} from '../reducers/ApiCasos';
 import {Clientlice} from '../reducers/ApiUsers';
+import {dashboardSlice} from '../reducers/ApiDashboard';
 import { configureStore } from '@reduxjs/toolkit';
 
 const store = configureStore ({
@@ -10,7 +11,8 @@ const store = configureStore ({
         clients:clientSlice.reducer,
         Refrestoken:refresTokenslice.reducer,
         Casos:Casoslice.reducer,
-        users:Clientlice.reducer
+        users:Clientlice.reducer,
+        dashboard:dashboardSlice.reducer
         },
     devTools:true,
 

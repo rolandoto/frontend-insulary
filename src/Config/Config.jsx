@@ -3,4 +3,3 @@ export const config = {
     serverRoute: "https://backendinsulary-production.up.railway.app"
   }
   
- 

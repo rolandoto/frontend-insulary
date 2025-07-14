@@ -309,6 +309,29 @@ const GetRefrestToken = async () => {
       }
   };
 
+
+   const Alldashboard = async ({token}) => {
+    try {
+      const resp = await fetch(`${config.serverRoute}/api/client/AllDashboard`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+           'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify()
+      });
+        if (!resp.ok) {
+          
+          throw new Error('Response is not ok');
+        }
+        const data = await resp.json();
+
+        return data
+      } catch (error) {
+        throw error; // You can re-throw the error or handle it differently based on your needs
+      }
+  };
+
   export default {
     fetchClients,
     fetchClientsFilter,
@@ -323,5 +346,6 @@ const GetRefrestToken = async () => {
     fetchUsersRoles,
     fetchUsersByID,
     fetchUsersFilter,
-    fetchCasosFilter
+    fetchCasosFilter,
+    Alldashboard
   }

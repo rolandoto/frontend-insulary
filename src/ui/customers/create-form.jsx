@@ -1,7 +1,6 @@
 'use client';
 
 import { CiUser } from "react-icons/ci";
-import { FaDollarSign } from "react-icons/fa";
 import { Link } from "react-router";
 import { Button } from "../button";
 import { createCustomers } from "../../lib/actions";
