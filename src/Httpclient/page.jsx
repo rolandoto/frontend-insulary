@@ -332,6 +332,98 @@ const GetRefrestToken = async () => {
       }
   };
 
+
+   const PostIntermderies = async ({query,currentPage,token}) => {
+    try {
+      const resp = await fetch(`${config.serverRoute}/api/intermederies/PostIntermederies`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({query,currentPage})
+      });
+        if (!resp.ok) {
+          
+          throw new Error('Response is not ok');
+        }
+        const data = await resp.json();
+
+        return data.intermederies
+      } catch (error) {
+        throw error; // You can re-throw the error or handle it differently based on your needs
+      }
+  };
+
+   const PostIntermderiesFilter = async ({query,currentPage,token}) => {
+    try {
+      const resp = await fetch(`${config.serverRoute}/api/intermederies/PostIntermederies`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+           'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({query,currentPage})
+      });
+        if (!resp.ok) {
+          
+          throw new Error('Response is not ok');
+        }
+        const data = await resp.json();
+
+        return data.intermederiesFilter
+      } catch (error) {
+        throw error; // You can re-throw the error or handle it differently based on your needs
+      }
+  };
+
+     const PostIntermderiesTotalPage= async ({query,currentPage,token}) => {
+        try {
+          const resp = await fetch(`${config.serverRoute}/api/intermederies/PostIntermederiesTotalPages`, {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({query,currentPage})
+          });
+            if (!resp.ok) {
+              
+              throw new Error('Response is not ok');
+            }
+            const data = await resp.json();
+
+            return data.totalPages
+          } catch (error) {
+            throw error; // You can re-throw the error or handle it differently based on your needs
+          }
+  };
+
+
+  const fetchIntermederiesbyID = async ({id,token}) => {
+    try {
+        const resp = await fetch(`${config.serverRoute}/api/intermederies/PostIntermederiesByID`, {
+          method: "POST",
+          body: JSON.stringify({id}),
+          headers: {
+              'Content-type': 'application/json',
+               'Authorization': `Bearer ${token}`
+          },
+        });
+        if (!resp.ok) {
+          throw new Error('Response is not ok');
+        }
+        const data = await resp.json();
+
+        return data.intermederies
+      } catch (error) {
+        throw error; // You can re-throw the error or handle it differently based on your needs
+      }
+  };
+
+
+  //Intermederies
+
   export default {
     fetchClients,
     fetchClientsFilter,
@@ -347,5 +439,10 @@ const GetRefrestToken = async () => {
     fetchUsersByID,
     fetchUsersFilter,
     fetchCasosFilter,
-    Alldashboard
+    Alldashboard,
+    PostIntermderies,
+    PostIntermderies,
+    PostIntermderiesFilter,
+    PostIntermderiesTotalPage,
+    fetchIntermederiesbyID
   }

@@ -16,6 +16,9 @@ import PublicRoute from "./AuthContext/PublicRoute"
 import Users from "./pages/users/page"
 import CreateUsersForm from "./pages/users/create/page"
 import UpadateUsers from "./pages/users/update/page"
+import Intermederies from "./pages/Intermederies/page"
+import CreateIntermederiesForm from "./pages/Intermederies/Create/page"
+import UpadateIntermederies from "./pages/Intermederies/update/page"
 
 function App() {
 
@@ -35,6 +38,9 @@ function App() {
                 <Route path='/dashboard/users' element={<PrivateRoute><Users /></PrivateRoute>} />
                 <Route path='dashboard/users/create' element={ <PrivateRoute><CreateUsersForm /></PrivateRoute> } />
                 <Route path='/dashboard/users/:id/edit' element={ <PrivateRoute><UpadateUsers /></PrivateRoute>} />
+                <Route path='/dashboard/intermederies' element={ <PrivateRoute><Intermederies/></PrivateRoute>} />
+                <Route path='/dashboard/intermederies/create' element={ <PrivateRoute><CreateIntermederiesForm/></PrivateRoute>} />
+                 <Route path='/dashboard/intermederies/:id/edit' element={ <PrivateRoute><UpadateIntermederies/></PrivateRoute>} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
           </BrowserRouter>

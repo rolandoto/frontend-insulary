@@ -31,7 +31,7 @@ const Casos =() =>{
                 <h1 className="lucitana text-2xl">Casos</h1>
               </div>
               <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-                <Search placeholder="Buscar clientes..." />
+                <Search placeholder="Buscar Casos..." />
                 <CreateCasos />
                 <DownloadExcel  data={casosFilter} filename={"casos.xlsx"}  />
               </div>

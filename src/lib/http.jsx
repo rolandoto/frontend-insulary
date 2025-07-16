@@ -7,10 +7,7 @@ const fetchClient = async () => {
           headers: {
             'Content-type': 'application/json'
           },
-          
         });
-
-
 
         if (!resp.ok) {
           throw new Error('Response is not ok');

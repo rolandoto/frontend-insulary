@@ -3,7 +3,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { deleteCasos } from '../lib/actions';
 import { useSelector } from 'react-redux';
 
-export function Button({ children, className, ...rest }) {
+export function Button({ children, className,...rest }) {
   return (
     <button
       {...rest}

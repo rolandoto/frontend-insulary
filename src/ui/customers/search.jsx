@@ -3,6 +3,7 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useLocation, useNavigate, useSearchParams } from "react-router"; // usa react-router-dom, no "react-router"
 import {useDebouncedCallback} from  "use-debounce"
 export default function Search({ placeholder }) {
+  
   const [searchParams] = useSearchParams(); // destructura correctamente
   const { pathname } = useLocation();
   const navigate = useNavigate();

@@ -24,7 +24,6 @@ const CreateCustomers = FormSchema.omit({ id: true, date: true });
 
 export async function createCustomers(token,prevState, formData) {
 
-
   const validatedFields = CreateCustomers.safeParse({
     name: formData.get("name"),
     document: formData.get("document"),
@@ -226,8 +225,6 @@ export async function updateCustomers(id,token,prevState, formData) {
       usersId: formData.get("usersId"),
       password: formData.get("password"),
         });
-  
- 
     if (!validatedFields.success) {
       return {
         errors: validatedFields.error.flatten().fieldErrors,
@@ -235,8 +232,6 @@ export async function updateCustomers(id,token,prevState, formData) {
       };
     }
     const {name,email,usersId,password}  = validatedFields.data
-  
-   
     try {
       
       const res = await fetch(`${config.serverRoute}/api/admin/changePassword`, {
@@ -278,7 +273,6 @@ export async function updateCustomers(id,token,prevState, formData) {
   }
 
   export async function deleteCasos(id,token) {
-    
     try {
       
       const res = await fetch(`${config.serverRoute}/api/client/DeleteGetReportecasos`, {
@@ -312,6 +306,148 @@ export async function updateCustomers(id,token,prevState, formData) {
       
     } catch (err) {
 
+      toast.error("Algo paso en el sistema")
+      return {
+          message:"error en el sistem"
+    }
+  }
+  
+  }
+
+
+
+const FormSchemaIntermederies = z.object({
+  id: z.string(), // Suponemos que el ID es opcional o viene precargado
+  name: z.string().nonempty('Por favor, ingresa un nombre completo.'),
+  document: z.string().nonempty('Por favor, ingresa un número de documento.'),
+  email: z
+    .string()
+    .nonempty('Por favor, ingresa un correo electrónico.')
+    .email('El correo electrónico ingresado no es válido.'),
+  addres: z.string().nonempty('Por favor, ingresa una dirección.'),
+  tipo: z.string().nonempty('Por favor, selecciona un tipo.'),
+  telefono: z.string().nonempty('Por favor, ingresa un número de teléfono.'),
+});
+  
+
+
+const CreateIntermederies = FormSchemaIntermederies.omit({ id: true, date: true });
+
+export async function createIntermederies(token,prevState, formData) {
+
+  const validatedFields = CreateIntermederies.safeParse({
+    name: formData.get("name"),
+    document: formData.get("document"),
+    addres: formData.get("addres"),
+    telefono: formData.get("telefono"),
+    tipo: formData.get("tipo"),
+    email: formData.get("email"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Hay campos inválidos.',
+    };
+  }
+
+  const {name,document,addres,tipo,telefono,email} = validatedFields.data
+
+  try {
+
+     const res = await fetch(`${config.serverRoute}/api/intermederies/PostRegisterIntermederies`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`, // ← Aquí va el token correctamente
+        },
+        body: JSON.stringify({name,document,addres,tipo,telefono,email}),
+      });
+    
+      const responseData = await res.json();
+    
+      if (!res.ok) {
+        toast.error(responseData.msg || 'Error al registrar cliente.');
+        return {
+          success: false,
+          message: responseData.msg || 'Error al registrar cliente.',
+          errors: responseData.errors,
+        };
+      }
+
+      toast.success("Caso eliminado correctamente");
+      window.location.reload()
+      return {
+        success: true,
+        message: "Cliente creado exitosamente",
+        data:"trye",
+      }
+
+
+  } catch (err) {
+   
+    return {
+        message:"error en el sistem"
+  }
+}
+
+}
+
+
+
+export async function updateIntermederies(id,token,prevState, formData) {
+  
+    const validatedFields = CreateIntermederies.safeParse({
+          name: formData.get("name"),
+          document: formData.get("document"),
+          addres: formData.get("addres"),
+          telefono: formData.get("telefono"),
+          tipo: formData.get("tipo"),
+          email: formData.get("email"),
+    });
+  
+    if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+        message: 'Hay campos inválidos.',
+      };
+    }
+
+
+    
+    const {name,document,addres,tipo,telefono,email}  = validatedFields.data
+    
+
+    try {
+   
+       const res = await fetch(`${config.serverRoute}/api/intermederies/PostUpdateIntermederies`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              'Authorization': `Bearer ${token}`, // ← Aquí va el token correctamente
+            },
+            body: JSON.stringify({name,document,addres,tipo,telefono,email,id}),
+          });
+          if (!res.ok) {
+            const response = await res.json();
+            toast.error("Error en los datos")
+            return {
+                success: false,
+                message: response.msg || 'Error al registrar cliente.',
+                errors: response.errors ,
+              };
+          }
+          const responseData = await res.json();
+          
+          toast.success("usuario guardado correctamente")
+          return {
+            message: "Cliente creado exitosamente",
+            data: responseData,
+          };
+
+
+    } catch (err) {
+      console.log(err)
       toast.error("Algo paso en el sistema")
       return {
           message:"error en el sistem"

@@ -2,43 +2,40 @@ import React, { Suspense, useEffect } from "react"
 import Breadcrumbs from "../../../ui/Breadcrumbs"
 import { useParams } from "react-router"
 import Layout from "../../dashboard/layout"
-import EditCustomersForm from "../../../ui/customers/edit-form"
-import ActionsClient from "../../../Actions/ActionsClient"
 import { useDispatch, useSelector } from "react-redux"
 import { InvoicesTableSkeleton } from "../../../ui/skeleton"
-import NotFound from "../no-found/not-found"
 import Error from "../../../ui/Error"
+import ActionsIntermederies from "../../../Actions/ActionsIntermederies"
 
-
-
-const UpadateCustomers =() =>{
+const UpadateIntermederies =() =>{
     const dispatch = useDispatch();
-    const {PostClientById} =   ActionsClient()
+    const {PostIntermederiesById} =   ActionsIntermederies()
     const { id } = useParams();
     const { accessToken} = useSelector(
         (state) => state.Refrestoken
       );
-    const { clientById, isLoadingClient, clientError } = useSelector((state) => state.clients);
+    const { IntermederiesById, isLoadingIntermederies, IntermederiesError } = useSelector((state) => state.intermederies);
+
     useEffect(() => {
-            PostClientById({id,token:accessToken}); // asegúrate de que esto sea un thunk
+            PostIntermederiesById({id,token:accessToken}); // asegúrate de que esto sea un thunk
       }, [dispatch]);
 
-const LazyTable = React.lazy(() =>
-    new Promise((resolve) => {
-      setTimeout(() => resolve(import("../../../ui/customers/edit-form")), 500);
-    })
-  );
+    const LazyTable = React.lazy(() =>
+        new Promise((resolve) => {
+        setTimeout(() => resolve(import("../../../ui/intermederies/edit-form")), 500);
+        })
+    );
 
    const fillContent =() =>{
-    if(isLoadingClient){
+    if(isLoadingIntermederies){
         <InvoicesTableSkeleton />
     }
-    if(clientError){
+    if(IntermederiesError){
         return <Error />
     }
     
     return       <Suspense  fallback={<InvoicesTableSkeleton />}>
-                    <LazyTable  customers={clientById} />
+                    <LazyTable   intermederies={IntermederiesById} />
                 </Suspense>
    }
 
@@ -47,19 +44,18 @@ const LazyTable = React.lazy(() =>
                 <main>
                 <Breadcrumbs
                     breadcrumbs={[
-                    { label: 'cliente', href: '/dashboard/customers' },
+                    { label: 'Intermederios', href: '/dashboard/intermederies' },
                     {
-                        label: 'Actualizar cliente',
-                        href: `/dashboard/customers/${id}/edit`,
+                        label: 'Actualizar Intermederios',
+                        href: `/dashboard/intermederies/${id}/edit`,
                         active: true,},
                     ]}
                 />
                 </main>
-            {fillContent()}
-                
+                {fillContent()}
             </Layout>
         </>
 
 }
 
-export default UpadateCustomers
+export default UpadateIntermederies

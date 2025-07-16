@@ -2,7 +2,7 @@
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { TfiHome } from "react-icons/tfi";
 import { IoDocumentsOutline } from "react-icons/io5";
-import { Link, useHref, useParams } from 'react-router';
+import { Link, useHref } from 'react-router';
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
@@ -12,7 +12,8 @@ const links = [
     {name: 'Facturas',href: '/dashboard/invoices',icon: IoDocumentsOutline,},
     { name: 'Clientes', href: '/dashboard/customers', icon: HiOutlineUserGroup },
     { name: 'Casos', href: '/dashboard/casos', icon: HiOutlineUserGroup },
-    { name: 'Usuarios', href: '/dashboard/users', icon: HiOutlineUserGroup }
+    { name: 'Usuarios', href: '/dashboard/users', icon: HiOutlineUserGroup },
+    { name: 'Intermederios', href: '/dashboard/intermederies', icon: HiOutlineUserGroup }
 ];
 
 export default function NavLinks() {

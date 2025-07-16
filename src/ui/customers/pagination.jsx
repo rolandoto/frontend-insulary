@@ -1,14 +1,16 @@
-import React from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router';
 import clsx from 'clsx';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { generatePagination } from '../../lib/utils';
+
 
 export default function Pagination({ totalPages }) {
 const { pathname } = useLocation();
   const [searchParams] = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
   const allPages = generatePagination(currentPage, totalPages);
+
+
 
   // Reconstruye la URL con el nuevo parámetro `page`
   const createPageURL = (page) => {
