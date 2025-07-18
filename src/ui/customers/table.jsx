@@ -13,7 +13,7 @@ export default  function Table({query,currentPage}) {
     const { accessToken} = useSelector(
       (state) => state.Refrestoken
     );
-
+    
     useEffect(() => {
         const fetch = () => {
         PostClient({ query, currentPage,token:accessToken});

@@ -19,6 +19,9 @@ import UpadateUsers from "./pages/users/update/page"
 import Intermederies from "./pages/Intermederies/page"
 import CreateIntermederiesForm from "./pages/Intermederies/Create/page"
 import UpadateIntermederies from "./pages/Intermederies/update/page"
+import Branches from "./pages/Branches/pages"
+import UpadateBranches from "./pages/Branches/update/page"
+import CreateBranchesForm from "./pages/Branches/create/page"
 
 function App() {
 
@@ -36,11 +39,14 @@ function App() {
                 <Route path='/dashboard/casos' element={<PrivateRoute><Casos /></PrivateRoute>} />
                 <Route path='/dashboard/casos' element={<PrivateRoute><Casos /></PrivateRoute>} />
                 <Route path='/dashboard/users' element={<PrivateRoute><Users /></PrivateRoute>} />
-                <Route path='dashboard/users/create' element={ <PrivateRoute><CreateUsersForm /></PrivateRoute> } />
+                <Route path='/dashboard/users/create' element={ <PrivateRoute><CreateUsersForm /></PrivateRoute> } />
                 <Route path='/dashboard/users/:id/edit' element={ <PrivateRoute><UpadateUsers /></PrivateRoute>} />
                 <Route path='/dashboard/intermederies' element={ <PrivateRoute><Intermederies/></PrivateRoute>} />
                 <Route path='/dashboard/intermederies/create' element={ <PrivateRoute><CreateIntermederiesForm/></PrivateRoute>} />
-                 <Route path='/dashboard/intermederies/:id/edit' element={ <PrivateRoute><UpadateIntermederies/></PrivateRoute>} />
+                <Route path='/dashboard/intermederies/:id/edit' element={ <PrivateRoute><UpadateIntermederies/></PrivateRoute>} />
+                <Route path='/dashboard/branches' element={ <PrivateRoute><Branches/></PrivateRoute>} />
+                <Route path='/dashboard/branches/create' element={ <PrivateRoute><CreateBranchesForm/></PrivateRoute>} />
+                <Route path='/dashboard/branches/:id/edit' element={ <PrivateRoute><UpadateBranches/></PrivateRoute>} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
           </BrowserRouter>

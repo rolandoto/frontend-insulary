@@ -20,12 +20,12 @@ export default function FormUsers() {
     (state) => state.users
   );  
 
-  useEffect(() => {
-    const fetch = () => {
-      PostUsersRole({token:accessToken});
-    };
-    fetch();
-}, []);
+    useEffect(() => {
+      const fetch = () => {
+        PostUsersRole({token:accessToken});
+      };
+      fetch();
+  }, []);
 
 
   const initialState ={message:"",errors:{}};

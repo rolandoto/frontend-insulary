@@ -422,7 +422,95 @@ const GetRefrestToken = async () => {
   };
 
 
-  //Intermederies
+     const PostBranches = async ({query,currentPage,token}) => {
+        try {
+          const resp = await fetch(`${config.serverRoute}/api/branches/PostBranches`, {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({query,currentPage})
+          });
+            if (!resp.ok) {
+              
+              throw new Error('Response is not ok');
+            }
+            const data = await resp.json();
+
+            return data.branches
+          } catch (error) {
+            throw error; // You can re-throw the error or handle it differently based on your needs
+          }
+      };
+
+      const PostBranchesFilter = async ({query,currentPage,token}) => {
+        try {
+          const resp = await fetch(`${config.serverRoute}/api/branches/PostBranches`, {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({query,currentPage})
+          });
+            if (!resp.ok) {
+              
+              throw new Error('Response is not ok');
+            }
+            const data = await resp.json();
+
+            return data.intermederiesFilter
+          } catch (error) {
+            throw error; // You can re-throw the error or handle it differently based on your needs
+          }
+      };
+
+      const PostBranchesTotalPage = async ({query,token}) => {
+        try {
+          const resp = await fetch(`${config.serverRoute}/api/branches/PostBranchesTotalPages`, {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({query})
+          });
+            if (!resp.ok) {
+              
+              throw new Error('Response is not ok');
+            }
+            const data = await resp.json();
+
+            return data.totalPages
+          } catch (error) {
+            throw error; // You can re-throw the error or handle it differently based on your needs
+          }
+      };
+
+
+      
+  const fetchBranchesbyID = async ({id,token}) => {
+    try {
+        const resp = await fetch(`${config.serverRoute}/api/branches/PostBranchesByID`, {
+          method: "POST",
+          body: JSON.stringify({id}),
+          headers: {
+              'Content-type': 'application/json',
+               'Authorization': `Bearer ${token}`
+          },
+        });
+        if (!resp.ok) {
+          throw new Error('Response is not ok');
+        }
+        const data = await resp.json();
+
+        return data.branches
+      } catch (error) {
+        throw error; // You can re-throw the error or handle it differently based on your needs
+      }
+  };
+
 
   export default {
     fetchClients,
@@ -444,5 +532,9 @@ const GetRefrestToken = async () => {
     PostIntermderies,
     PostIntermderiesFilter,
     PostIntermderiesTotalPage,
-    fetchIntermederiesbyID
+    fetchIntermederiesbyID,
+    PostBranches,
+    PostBranchesTotalPage,
+    PostBranchesFilter,
+    fetchBranchesbyID
   }

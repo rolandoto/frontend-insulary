@@ -137,7 +137,6 @@ export default function EditUsersForm({ users }) {
                 ))}
             </div>
         </div>
-    
     </div>
 
     <div className="mt-6 flex justify-end gap-4">

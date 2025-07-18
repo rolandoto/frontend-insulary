@@ -28,7 +28,7 @@ const UpadateIntermederies =() =>{
 
    const fillContent =() =>{
     if(isLoadingIntermederies){
-        <InvoicesTableSkeleton />
+     return    <InvoicesTableSkeleton />
     }
     if(IntermederiesError){
         return <Error />

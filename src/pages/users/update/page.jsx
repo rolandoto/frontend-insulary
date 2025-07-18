@@ -39,7 +39,7 @@ const UpadateUsers =() =>{
 
    const fillContent =() =>{
     if(LoadingUser){
-        <InvoicesTableSkeleton />
+      return   <InvoicesTableSkeleton />
     }
     if(userError){
         return <Error />

@@ -17,7 +17,7 @@ const Intermederies =() =>{
     const query = searchParams.get("q") || "";
 
     const {error,intermediariesFilter,totalPages}= useSelector((state) => state.intermederies)
-
+    
      const fillCotent =() =>{ 
         if(error) return <Error/>
       

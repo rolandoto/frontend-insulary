@@ -31,7 +31,7 @@ const LazyTable = React.lazy(() =>
 
    const fillContent =() =>{
     if(isLoadingClient){
-        <InvoicesTableSkeleton />
+       return   <InvoicesTableSkeleton />
     }
     if(clientError){
         return <Error />

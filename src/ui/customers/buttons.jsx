@@ -78,6 +78,19 @@ export function CreateInvoice() {
   }
 
 
+     export function CreateBranches() {
+    return (
+      <Link
+        to="/dashboard/branches/create"
+        className="flex h-10 items-center rounded-lg bg-[#df0209] px-4 text-sm font-medium text-white transition-colors hover:bg-[#df0209] focus-visible:bg-[#df0209] focus-visible:bg-[#df0209] focus-visible:outline-offset-2 focus-visible:"
+      >
+        <span className="hidden md:block">Crear Sucursales</span>{' '}
+        <FiPlus className="h-5 md:ml-4" />
+      </Link>
+    );
+  }
+
+
 
   export function CreateCasos() {
     return (
@@ -118,6 +131,18 @@ export function CreateInvoice() {
     return (
       <Link
         to={`/dashboard/intermederies/${id}/edit`}
+        className="rounded-md border border-gray-200 p-2 hover:bg-gray-100"
+      >
+        <HiOutlinePencil fontSize={25} className="w-5" />
+      </Link>
+    );
+  }
+
+
+   export function UpdateBranches({ id }) {
+    return (
+      <Link
+        to={`/dashboard/branches/${id}/edit`}
         className="rounded-md border border-gray-200 p-2 hover:bg-gray-100"
       >
         <HiOutlinePencil fontSize={25} className="w-5" />

@@ -430,7 +430,7 @@ export async function updateIntermederies(id,token,prevState, formData) {
           });
           if (!res.ok) {
             const response = await res.json();
-            toast.error("Error en los datos")
+            toast.error(response.msg || 'Error al registrar cliente.');
             return {
                 success: false,
                 message: response.msg || 'Error al registrar cliente.',
@@ -455,3 +455,132 @@ export async function updateIntermederies(id,token,prevState, formData) {
   }
   
   }
+
+const FormSchemaBranches = z.object({
+  id: z.string(), // Suponemos que el ID es opcional o viene precargado
+  name: z.string().nonempty('Por favor, ingresa un nombre completo.'),
+  code: z.string().nonempty('Por favor, ingresa un número de codigo.'),
+  addres: z.string().nonempty('Por favor, ingresa una dirección.'),
+  telefono: z.string().nonempty('Por favor, ingresa un número de teléfono.'),
+  clientId:  z.string({invalid_type_error: 'Por favor elegir tu cliente',}),
+});
+
+const branchesUpdate= FormSchemaBranches.omit({ id: true, date: true });
+
+
+export async function createbranches(token,prevState, formData) {
+  
+    const validatedFields = branchesUpdate.safeParse({
+          name: formData.get("name"),
+          code: formData.get("code"),
+          addres: formData.get("addres"),
+          telefono: formData.get("telefono"),
+          clientId: formData.get("clientId")
+    });
+
+    if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+        message: 'Hay campos inválidos.',
+      };
+    }
+
+    const {name,code,addres,telefono,clientId}  = validatedFields.data
+
+    try {
+      
+       const res = await fetch(`${config.serverRoute}/api/branches/PostCreateBranches`, {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+              'Authorization': `Bearer ${token}`, // ← Aquí va el token correctamente
+            },
+            body: JSON.stringify({name,code,addres,telefono,clientId}),
+          });
+          if (!res.ok) {
+            const response = await res.json();
+            toast.error(response.msg || 'Error al registrar cliente.');
+            return {
+                success: false,
+                message: response.msg || 'Error al registrar cliente.',
+                errors: response.errors ,
+              };
+          }
+          const responseData = await res.json();
+          
+          toast.success("usuario guardado correctamente")
+          return {
+            message: "Cliente creado exitosamente",
+            data: responseData,
+          };
+
+    } catch (err) {
+      console.log(err)
+      toast.error("Algo paso en el sistema")
+      return {
+          message:"error en el sistem"
+    }
+  }
+  
+  }
+
+
+
+
+  export async function updatebranches(id,token,prevState, formData) {
+  
+    const validatedFields = branchesUpdate.safeParse({
+          name: formData.get("name"),
+          code: formData.get("code"),
+          addres: formData.get("addres"),
+          telefono: formData.get("telefono"),
+          clientId: formData.get("clientId")
+    });
+
+    if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+        message: 'Hay campos inválidos.',
+      };
+    }
+
+    const {name,code,addres,telefono,clientId}  = validatedFields.data
+
+    try {
+   
+       const res = await fetch(`${config.serverRoute}/api/branches/PostUpdateBranches`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              'Authorization': `Bearer ${token}`, // ← Aquí va el token correctamente
+            },
+            body: JSON.stringify({name,code,addres,telefono,clientId,id}),
+          });
+          if (!res.ok) {
+            const response = await res.json();
+            toast.error(response.msg || 'Error al registrar cliente.');
+            return {
+                success: false,
+                message: response.msg || 'Error al registrar cliente.',
+                errors: response.errors ,
+              };
+          }
+          const responseData = await res.json();
+          
+          toast.success("usuario guardado correctamente")
+          return {
+            message: "Cliente creado exitosamente",
+            data: responseData,
+          };
+
+
+    } catch (err) {
+      console.log(err)
+      toast.error("Algo paso en el sistema")
+      return {
+          message:"error en el sistem"
+    }
+  }
+  
+  }
+
