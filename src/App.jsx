@@ -22,6 +22,7 @@ import UpadateIntermederies from "./pages/Intermederies/update/page"
 import Branches from "./pages/Branches/pages"
 import UpadateBranches from "./pages/Branches/update/page"
 import CreateBranchesForm from "./pages/Branches/create/page"
+import Text from "./pages/text"
 
 function App() {
 
@@ -47,7 +48,9 @@ function App() {
                 <Route path='/dashboard/branches' element={ <PrivateRoute><Branches/></PrivateRoute>} />
                 <Route path='/dashboard/branches/create' element={ <PrivateRoute><CreateBranchesForm/></PrivateRoute>} />
                 <Route path='/dashboard/branches/:id/edit' element={ <PrivateRoute><UpadateBranches/></PrivateRoute>} />
+                <Route path='/text' element={ <Text/>} />
                 <Route path="*" element={<NotFound />} />
+                
               </Routes>
           </BrowserRouter>
     </AppWrapper>
