@@ -95,7 +95,7 @@ export function CreateInvoice() {
   export function CreateCasos() {
     return (
       <Link
-        to="/dashboard/customers/create"
+        to="/dashboard/casos/create"
         className="flex h-10 items-center rounded-lg bg-[#df0209] px-4 text-sm font-medium text-white transition-colors hover:bg-[#df0209] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-[#df0209]"
       >
         <span className="hidden md:block">Crear Casos</span>{' '}
@@ -115,10 +115,22 @@ export function CreateInvoice() {
     );
   }
 
-  export function UpdateCustomers({ id }) {
+export function UpdateCustomers({ id }) {
     return (
       <Link
         to={`/dashboard/customers/${id}/edit`}
+        className="rounded-md border border-gray-200 p-2 hover:bg-gray-100"
+      >
+        <HiOutlinePencil fontSize={25} className="w-5" />
+      </Link>
+    );
+  }
+
+
+  export function UpdateCases({ id }) {
+    return (
+      <Link
+        to={`/dashboard/casos/${id}/edit`}
         className="rounded-md border border-gray-200 p-2 hover:bg-gray-100"
       >
         <HiOutlinePencil fontSize={25} className="w-5" />

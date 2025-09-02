@@ -6,6 +6,7 @@ import {Clientlice} from '../reducers/ApiUsers';
 import {dashboardSlice} from '../reducers/ApiDashboard';
 import {intermediariesSlice} from '../reducers/ApiIntermederies';
 import {branchesSlice} from '../reducers/ApiBranches';
+import {ramosSlice} from '../reducers/ApiRamos';
 import { configureStore } from '@reduxjs/toolkit';
 
 const store = configureStore ({
@@ -16,10 +17,10 @@ const store = configureStore ({
         users:Clientlice.reducer,
         dashboard:dashboardSlice.reducer,
         intermederies:intermediariesSlice.reducer,
-        branches:branchesSlice.reducer
+        branches:branchesSlice.reducer,
+        ramos:ramosSlice.reducer
         },
     devTools:true,
-
 })
 
 export const RootState = store.getState

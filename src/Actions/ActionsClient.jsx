@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import Httpclient from "../Httpclient/page"
-import { fetchClientByIdFailure, fetchClientByIdStart, fetchClientByIdSuccess, fetchClientsFailure, fetchClientsFilterSuccess, fetchClientsStart, fetchClientsSuccess, fetchPagesFailure, fetchPagesStart, fetchPagesSuccess } from "../reducers/ApiClient";
+import { fetchCasesbyIDFailure, fetchCasesbyIDStart, fetchCasesbyIDSuccess, fetchClientByIdFailure, fetchClientByIdStart, fetchClientByIdSuccess, fetchClientsFailure, fetchClientsFilterSuccess, fetchClientsStart, fetchClientsSuccess, fetchEstadosCasosFailure, fetchEstadosCasosStart, fetchEstadosCasosSuccess, fetchPagesFailure, fetchPagesStart, fetchPagesSuccess } from "../reducers/ApiClient";
 
 const ActionsClient =() =>{
 
@@ -14,8 +14,7 @@ const ActionsClient =() =>{
 
            if(response){
                     dispatch(fetchClientsSuccess(response)) 
-                    dispatch(fetchClientsFilterSuccess(responseFilterClients)) 
-                  
+                    dispatch(fetchClientsFilterSuccess(responseFilterClients))  
            }else{
                     dispatch(fetchClientsFailure("no found"))       
            }
@@ -55,9 +54,48 @@ const ActionsClient =() =>{
         }
     }
 
+
+
+    const PostCasesById =async({id,token}) =>{
+        dispatch(fetchCasesbyIDStart())
+        try {
+           
+           const response =   await Httpclient.fetchCasesbyID({id,token})
+
+           if(response){
+                    dispatch(fetchCasesbyIDSuccess(response)) 
+           }else{
+                    dispatch(fetchCasesbyIDFailure("no found"))       
+           }
+        } catch (error) {
+            dispatch(fetchCasesbyIDFailure("no found"))                   
+        }
+    }
+
+
+
+     const PostCasosEstados =async({id,token}) =>{
+    
+        dispatch(fetchEstadosCasosStart())
+        try {
+           
+           const response =   await Httpclient.FetchPosStateCasos({id,token})
+
+           if(response){
+                    dispatch(fetchEstadosCasosSuccess(response)) 
+           }else{
+                    dispatch(fetchEstadosCasosFailure("no found"))       
+           }
+        } catch (error) {
+            dispatch(fetchCasesbyIDFailure("no found"))                   
+        }
+    }
+
     return {PostClient,
         PostClientPages,
-        PostClientById
+        PostClientById,
+        PostCasesById,
+        PostCasosEstados
     }
 
 }

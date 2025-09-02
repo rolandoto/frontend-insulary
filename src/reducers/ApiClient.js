@@ -15,6 +15,15 @@ const initialState = {
   clientById: null,
   isLoadingClient: false,
   clientError: null,
+
+
+  casosById: null,
+  isLoadingCasos: false,  
+  casosError: null,
+
+  loadingEstadosCasos:false,
+  casosEstados:[],
+  errorEstadosCasos:false
 };
 
 export const clientSlice = createSlice({
@@ -31,7 +40,7 @@ export const clientSlice = createSlice({
       state.clients = action.payload;
     },
     fetchClientsFilterSuccess: (state, action) => {
-      state.loading = false;
+  
       state.ClientFilter = action.payload;
     },
     fetchClientsFailure: (state, action) => {
@@ -66,6 +75,39 @@ export const clientSlice = createSlice({
       state.isLoadingClient = false;
       state.clientError = true;
     },
+
+
+    fetchCasesbyIDStart: (state) => {
+      state.isLoadingCasos = true;
+      state.casosError = null;
+    },
+
+    fetchCasesbyIDSuccess: (state, action) => {
+      state.isLoadingCasos = false;
+      state.casosById = action.payload;
+    },
+
+    fetchCasesbyIDFailure: (state, action) => {
+      state.isLoadingCasos = false;
+      state.casosError = true;
+    },
+
+
+    fetchEstadosCasosStart: (state) => {
+      state.loadingEstadosCasos = true;
+      state.errorEstadosCasos = null;
+    },
+
+    fetchEstadosCasosSuccess: (state, action) => {
+      state.loadingEstadosCasos = false;
+      state.casosEstados = action.payload;
+    },
+
+    fetchEstadosCasosFailure: (state, action) => {
+      state.loadingEstadosCasos = false;
+      state.casosError = true;
+    },
+
   },
 });
 
@@ -79,7 +121,13 @@ export const {
   fetchPagesFailure,
   fetchClientByIdFailure,
   fetchClientByIdSuccess,
-  fetchClientByIdStart
+  fetchClientByIdStart,
+  fetchCasesbyIDStart,
+  fetchCasesbyIDSuccess,
+  fetchCasesbyIDFailure,
+  fetchEstadosCasosStart,
+  fetchEstadosCasosSuccess,
+  fetchEstadosCasosFailure
 } = clientSlice.actions;
 
 export default clientSlice.reducer;

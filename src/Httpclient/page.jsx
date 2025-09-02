@@ -1,6 +1,7 @@
 import { config } from "../Config/Config";
 
 const fetchClients = async ({query,currentPage,token}) => {
+  
     try {
         const resp = await fetch(`${config.serverRoute}/api/client/PostClient`, {
           method: "POST",
@@ -14,10 +15,11 @@ const fetchClients = async ({query,currentPage,token}) => {
           throw new Error('Response is not ok');
         }
         const data = await resp.json();
+
         return data.clients
         
       } catch (error) {
-       
+        
         throw error; // You can re-throw the error or handle it differently based on your needs
       }
   };
@@ -40,7 +42,7 @@ const fetchClients = async ({query,currentPage,token}) => {
         return data.clientsFilter
         
       } catch (error) {
-       
+        
         throw error; // You can re-throw the error or handle it differently based on your needs
       }
   };
@@ -512,6 +514,115 @@ const GetRefrestToken = async () => {
   };
 
 
+   const fetchCasesbyID = async ({id,token}) => {
+    try {
+        const resp = await fetch(`${config.serverRoute}/api/client/PostCasesByID`, {
+          method: "POST",
+          body: JSON.stringify({id}),
+          headers: {
+              'Content-type': 'application/json',
+               'Authorization': `Bearer ${token}`
+          },
+        });
+        if (!resp.ok) {
+          throw new Error('Response is not ok');
+        }
+        const data = await resp.json();
+
+        return data.cases
+      } catch (error) {
+        throw error; // You can re-throw the error or handle it differently based on your needs
+      }
+  };
+
+  
+   const FetchPostUpdateCasos = async ({id,token}) => {
+    try {
+        const resp = await fetch(`${config.serverRoute}/api/client/PostUpdatetecasos`, {
+          method: "POST",
+          body: JSON.stringify({id}),
+          headers: {
+              'Content-type': 'application/json',
+               'Authorization': `Bearer ${token}`
+          },
+        });
+        if (!resp.ok) {
+          throw new Error('Response is not ok');
+        }
+        const data = await resp.json();
+
+        return data
+      } catch (error) {
+        throw error; // You can re-throw the error or handle it differently based on your needs
+      }
+  };
+
+   const FetchPosStateCasos = async ({id,token}) => {
+    try {
+        const resp = await fetch(`${config.serverRoute}/api/client/PostStateCasos`, {
+          method: "POST",
+          body: JSON.stringify({id}),
+          headers: {
+              'Content-type': 'application/json',
+               'Authorization': `Bearer ${token}`
+          },
+        });
+        if (!resp.ok) {
+          throw new Error('Response is not ok');
+        }
+        const data = await resp.json();
+
+        return data.estadosCasos
+      } catch (error) {
+        throw error; 
+      }
+  };
+
+
+   const fetchRamos = async ({query,token}) => {
+    try {
+        const resp = await fetch(`${config.serverRoute}/api/ramos/PostRamos`, {
+          method: "POST",
+          body: JSON.stringify({query}),
+          headers: {
+              'Content-type': 'application/json',
+               'Authorization': `Bearer ${token}`
+          },
+        });
+        if (!resp.ok) {
+          throw new Error('Response is not ok');
+        }
+        const data = await resp.json();
+
+        return data.ramosFilter
+      } catch (error) {
+        throw error; // You can re-throw the error or handle it differently based on your needs
+      }
+  };
+
+
+  const fetchAmparos = async ({query,token}) => {
+    try {
+        const resp = await fetch(`${config.serverRoute}/api/ramos/PostRamos`, {
+          method: "POST",
+          body: JSON.stringify({query}),
+          headers: {
+              'Content-type': 'application/json',
+               'Authorization': `Bearer ${token}`
+          },
+        });
+        if (!resp.ok) {
+          throw new Error('Response is not ok');
+        }
+        const data = await resp.json();
+
+        return data.AmparosFilter
+      } catch (error) {
+        throw error; 
+      }
+  };
+
+
   export default {
     fetchClients,
     fetchClientsFilter,
@@ -536,5 +647,10 @@ const GetRefrestToken = async () => {
     PostBranches,
     PostBranchesTotalPage,
     PostBranchesFilter,
-    fetchBranchesbyID
+    fetchBranchesbyID,
+    fetchRamos,
+    fetchAmparos,
+    fetchCasesbyID,
+    FetchPostUpdateCasos,
+    FetchPosStateCasos
   }

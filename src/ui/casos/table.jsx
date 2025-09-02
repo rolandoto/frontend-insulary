@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import ActionsCasos from "../../Actions/ActionsCasos";
 import { useEffect } from "react";
 import users  from "../../../public/customers/evil-rabbit.png"
-import { UpdateCustomers } from "../customers/buttons";
+import { UpdateCases, UpdateCustomers } from "../customers/buttons";
 import { InvoicesTableSkeleton } from "../skeleton";
 import moment from "moment";
 import SemaforoEstado from "./Trafficlight";
@@ -158,7 +158,7 @@ export default  function Table({query,currentPage}) {
                     <SemaforoEstado nombreEstado={client.estado} />
                     <td className="whitespace-nowrap py-3 pl-6 pr-3">
                         <div className="flex justify-end gap-3">
-                            <UpdateCustomers id={client.id} />
+                            <UpdateCases id={client.id} />
                             <DeleteCasos id={client.id} />
                         </div>
                     </td>

@@ -23,6 +23,8 @@ import Branches from "./pages/Branches/pages"
 import UpadateBranches from "./pages/Branches/update/page"
 import CreateBranchesForm from "./pages/Branches/create/page"
 import Text from "./pages/text"
+import CreateCasesForm from "./pages/casos/Create/page"
+import UpadateCases from "./pages/casos/update/page"
 
 function App() {
 
@@ -38,7 +40,8 @@ function App() {
                 <Route path='/dashboard/customers/:id/edit' element={ <PrivateRoute><UpadateCustomers /></PrivateRoute>} />
                 <Route path='/dashboard/invoices' element={ <PrivateRoute><Invoince /></PrivateRoute>} />
                 <Route path='/dashboard/casos' element={<PrivateRoute><Casos /></PrivateRoute>} />
-                <Route path='/dashboard/casos' element={<PrivateRoute><Casos /></PrivateRoute>} />
+                <Route path='/dashboard/casos/create' element={<PrivateRoute><CreateCasesForm /></PrivateRoute>} />
+                <Route path='/dashboard/casos/:id/edit' element={<PrivateRoute><UpadateCases /></PrivateRoute>} />
                 <Route path='/dashboard/users' element={<PrivateRoute><Users /></PrivateRoute>} />
                 <Route path='/dashboard/users/create' element={ <PrivateRoute><CreateUsersForm /></PrivateRoute> } />
                 <Route path='/dashboard/users/:id/edit' element={ <PrivateRoute><UpadateUsers /></PrivateRoute>} />
@@ -50,7 +53,6 @@ function App() {
                 <Route path='/dashboard/branches/:id/edit' element={ <PrivateRoute><UpadateBranches/></PrivateRoute>} />
                 <Route path='/text' element={ <Text/>} />
                 <Route path="*" element={<NotFound />} />
-                
               </Routes>
           </BrowserRouter>
     </AppWrapper>
