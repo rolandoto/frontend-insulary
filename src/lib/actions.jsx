@@ -767,7 +767,7 @@ export async function createbranches(token,prevState, formData) {
           });
           if (!res.ok) {
             const response = await res.json();
-            CONSOLE
+         
             toast.error(response.msg || 'Error al registrar cliente.');
             return {
                 success: false,
