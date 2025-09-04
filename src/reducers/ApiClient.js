@@ -21,9 +21,20 @@ const initialState = {
   isLoadingCasos: false,  
   casosError: null,
 
+  
   loadingEstadosCasos:false,
   casosEstados:[],
-  errorEstadosCasos:false
+  errorEstadosCasos:false,
+
+
+  casosDocument:[],
+  loadingCasosDocument:false,
+  errorCasosDocument:false,
+
+  document:[],
+  loadingDocument:false,
+  errorDocument:false
+
 };
 
 export const clientSlice = createSlice({
@@ -108,6 +119,35 @@ export const clientSlice = createSlice({
       state.casosError = true;
     },
 
+     fetchCasosDocumentStart: (state) => {
+      state.loadingCasosDocument = true;
+      state.errorCasosDocument = null;
+    },
+    fetchCasosDocumentSuccess: (state, action) => {
+      state.loadingCasosDocument = false;
+      state.casosDocument = action.payload;
+    },
+
+    fetchCasosDocumentFailure: (state, action) => {
+      state.loadingCasosDocument = false;
+      state.errorCasosDocument = true;
+    },
+
+
+     fetchDocumentStart: (state) => {
+      state.loadingDocument = true;
+      state.errorDocument = null;
+    },
+    fetchDocumentSuccess: (state, action) => {
+      state.loadingDocument = false;
+      state.document = action.payload;
+    },
+
+    fetchDocumentFailure: (state, action) => {
+      state.loadingDocument = false;
+      state.errorDocument = true;
+    },
+
   },
 });
 
@@ -127,7 +167,13 @@ export const {
   fetchCasesbyIDFailure,
   fetchEstadosCasosStart,
   fetchEstadosCasosSuccess,
-  fetchEstadosCasosFailure
+  fetchEstadosCasosFailure,
+  fetchCasosDocumentStart,
+  fetchCasosDocumentSuccess,
+  fetchCasosDocumentFailure,
+  fetchDocumentStart,
+  fetchDocumentSuccess,
+  fetchDocumentFailure
 } = clientSlice.actions;
 
 export default clientSlice.reducer;

@@ -4,12 +4,13 @@ import { useParams } from "react-router";
 import Breadcrumbs from "../../../ui/Breadcrumbs";
 import Layout from "../../dashboard/layout";
 import ActionsClient from "../../../Actions/ActionsClient";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { InvoicesTableSkeleton } from "../../../ui/skeleton";
 import Error from "../../../ui/Error";
 import ActionsRamos from "../../../Actions/ActionsRamos";
 import ActionsIntermederies from "../../../Actions/ActionsIntermederies";
 import ActionsBranches from "../../../Actions/ActionsBranches";
+import { Toaster } from "sonner";
 
 export default function UpadateCases( ) {
   
@@ -54,19 +55,19 @@ export default function UpadateCases( ) {
 
   return (
           <Layout>
-                        <main>
-                        <Breadcrumbs
-                            breadcrumbs={[
-                            { label: 'Casos', href: '/dashboard/casos' },
-                            {
-                                label: 'Actualizar Caso',
-                                href: `/dashboard/casos/${id}/edit`,
-                                active: true,},
-                            ]}
-                        />
-                        </main>
-                    {fillContent()}
-                        
+           
+            <main>
+                <Breadcrumbs
+                    breadcrumbs={[
+                    { label: 'Casos', href: '/dashboard/casos' },
+                    {
+                        label: 'Actualizar Caso',
+                        href: `/dashboard/casos/${id}/edit`,
+                        active: true,},
+                    ]}
+                />
+            </main>
+            {fillContent()}            
         </Layout>
   );
 }

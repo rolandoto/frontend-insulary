@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import Httpclient from "../Httpclient/page"
-import { fetchCasesbyIDFailure, fetchCasesbyIDStart, fetchCasesbyIDSuccess, fetchClientByIdFailure, fetchClientByIdStart, fetchClientByIdSuccess, fetchClientsFailure, fetchClientsFilterSuccess, fetchClientsStart, fetchClientsSuccess, fetchEstadosCasosFailure, fetchEstadosCasosStart, fetchEstadosCasosSuccess, fetchPagesFailure, fetchPagesStart, fetchPagesSuccess } from "../reducers/ApiClient";
+import { fetchCasesbyIDFailure, fetchCasesbyIDStart, fetchCasesbyIDSuccess, fetchCasosDocumentFailure, fetchCasosDocumentStart, fetchCasosDocumentSuccess, fetchClientByIdFailure, fetchClientByIdStart, fetchClientByIdSuccess, fetchClientsFailure, fetchClientsFilterSuccess, fetchClientsStart, fetchClientsSuccess, fetchDocumentFailure, fetchDocumentStart, fetchDocumentSuccess, fetchEstadosCasosFailure, fetchEstadosCasosStart, fetchEstadosCasosSuccess, fetchPagesFailure, fetchPagesStart, fetchPagesSuccess } from "../reducers/ApiClient";
 
 const ActionsClient =() =>{
 
@@ -74,8 +74,7 @@ const ActionsClient =() =>{
 
 
 
-     const PostCasosEstados =async({id,token}) =>{
-    
+     const PostCasosEstados =async({id,token}) =>{ 
         dispatch(fetchEstadosCasosStart())
         try {
            
@@ -91,11 +90,49 @@ const ActionsClient =() =>{
         }
     }
 
+
+     const PostCasosDocument =async({id,token}) =>{ 
+        dispatch(fetchCasosDocumentStart())
+        try {
+           
+           const response =   await Httpclient.fetchCasosDocument({id,token})
+      
+           if(response){
+                    dispatch(fetchCasosDocumentSuccess(response)) 
+           }else{
+                    dispatch(fetchCasosDocumentFailure("no found"))       
+           }
+        } catch (error) {
+            dispatch(fetchCasosDocumentFailure("no found"))                   
+        }
+    }
+
+
+
+     const PostDocument =async({id,token}) =>{ 
+        
+        dispatch(fetchDocumentStart())
+        try {
+           
+           const response =   await Httpclient.fetchDocument({id,token})
+      
+           if(response){
+                    dispatch(fetchDocumentSuccess(response)) 
+           }else{
+                    dispatch(fetchDocumentFailure("no found"))       
+           }
+        } catch (error) {
+            dispatch(fetchDocumentFailure("no found"))                   
+        }
+    }
+
     return {PostClient,
         PostClientPages,
         PostClientById,
         PostCasesById,
-        PostCasosEstados
+        PostCasosEstados,
+        PostCasosDocument,
+        PostDocument
     }
 
 }

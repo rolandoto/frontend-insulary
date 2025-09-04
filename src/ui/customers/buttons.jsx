@@ -4,6 +4,7 @@ import { HiOutlinePencil } from "react-icons/hi2";
 import { CiTrash } from "react-icons/ci";
 import * as XLSX from 'xlsx';
 import { PiMicrosoftExcelLogoLight } from "react-icons/pi";
+import { IoIosDocument } from "react-icons/io";
 
 export function DownloadExcel  ({ data, filename }){
   const exportToExcel = () => {
@@ -126,6 +127,17 @@ export function UpdateCustomers({ id }) {
     );
   }
 
+
+  export function UploadDocumentCases({ id }) {
+    return (
+      <Link
+        to={`/dashboard/casos/${id}/Document`}
+        className="rounded-md border border-gray-200 p-2 hover:bg-gray-100"
+      >
+        <IoIosDocument fontSize={25} className="w-5" />
+      </Link>
+    );
+  }
 
   export function UpdateCases({ id }) {
     return (

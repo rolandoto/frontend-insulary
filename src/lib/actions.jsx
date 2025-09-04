@@ -102,8 +102,6 @@ export async function updateCustomers(id,token,prevState, formData) {
       const [date,time] = new Date().toISOString().split("T")
       const dateUpdate  = `${date} ${time}`
     
-
-
     const {name,document,addres,city,telefono,email}  = validatedFields.data
     
     try {
@@ -783,6 +781,84 @@ export async function createbranches(token,prevState, formData) {
             data: responseData,
           };
 
+    } catch (err) {
+
+      toast.error("Algo paso en el sistema")
+      return {
+          message:"error en el sistem"
+    }
+  }
+  
+  }
+
+
+
+const FormSchemaDocument = z.object({
+  id: z.string(), // Suponemos que el ID es opcional o viene precargado
+  name: z.string().nonempty('Por favor, ingresa un nombre completo.'),
+  description: z.string().nonempty('Por favor, ingresa un número de codigo.'),
+  file: z
+      .any()
+      .refine((file) => file instanceof File, {
+        message: "Debe adjuntar un archivo",
+      })
+      .refine((file) => file.size > 0, {
+        message: "Debe adjuntar un archivo válido",
+      }),
+});
+
+const documentUload= FormSchemaDocument.omit({ id: true, date: true });
+
+
+   export async function uploadCasos(id,token,prevState, formData) {
+
+      const validatedFields = documentUload.safeParse({
+        name: formData.get("name"),
+        description: formData.get("description"),
+        file: formData.get("file"),
+  });
+ 
+   if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+        message: 'Hay campos inválidos.',
+      };
+    }
+
+    const {name,description,file} =validatedFields.data
+    
+    try {
+            const formData = new FormData();
+            formData.append("name", name);
+            formData.append("description", description);
+            formData.append("file", file)
+            formData.append("id", id)
+            formData.append("token", token)
+
+
+      const res = await fetch(`${config.serverRoute}/api/client/document`, {
+        method: "POST",
+        headers: {
+          'Authorization': `Bearer ${token}`, // ✅ solo este
+        },
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const response = await res.json();
+        toast.error(response.msg || 'Error al registrar cliente.');
+        return {
+          success: false,
+          message: response.msg || 'Error al registrar cliente.',
+          errors: response.errors,
+        };
+      }
+
+      const responseData = await res.json();
+
+      toast.success("Guardado correctamente");
+
+      return "correctamente"
     } catch (err) {
 
       toast.error("Algo paso en el sistema")

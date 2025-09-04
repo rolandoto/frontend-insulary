@@ -623,6 +623,50 @@ const GetRefrestToken = async () => {
   };
 
 
+   const fetchCasosDocument = async ({id,token}) => {
+    try {
+        const resp = await fetch(`${config.serverRoute}/api/client/PostCasesDocumentByID`, {
+          method: "POST",
+          body: JSON.stringify({id}),
+          headers: {
+              'Content-type': 'application/json',
+               'Authorization': `Bearer ${token}`
+          },
+        });
+        if (!resp.ok) {
+          throw new Error('Response is not ok');
+        }
+        const data = await resp.json();
+
+        return data.estadosCasos
+      } catch (error) {
+        throw error; 
+      }
+  };
+
+
+     const fetchDocument = async ({id,token}) => {
+    try {
+        const resp = await fetch(`${config.serverRoute}/api/client/documentIDCaso`, {
+          method: "POST",
+          body: JSON.stringify({id}),
+          headers: {
+              'Content-type': 'application/json',
+               'Authorization': `Bearer ${token}`
+          },
+        });
+        if (!resp.ok) {
+          throw new Error('Response is not ok');
+        }
+        const data = await resp.json();
+
+        return data.document
+      } catch (error) {
+        throw error; 
+      }
+  };
+
+
   export default {
     fetchClients,
     fetchClientsFilter,
@@ -652,5 +696,7 @@ const GetRefrestToken = async () => {
     fetchAmparos,
     fetchCasesbyID,
     FetchPostUpdateCasos,
-    FetchPosStateCasos
+    FetchPosStateCasos,
+    fetchCasosDocument,
+    fetchDocument
   }

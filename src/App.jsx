@@ -25,6 +25,7 @@ import CreateBranchesForm from "./pages/Branches/create/page"
 import Text from "./pages/text"
 import CreateCasesForm from "./pages/casos/Create/page"
 import UpadateCases from "./pages/casos/update/page"
+import DocumentCases from "./pages/casos/Document/page"
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
                 <Route path='/dashboard/casos' element={<PrivateRoute><Casos /></PrivateRoute>} />
                 <Route path='/dashboard/casos/create' element={<PrivateRoute><CreateCasesForm /></PrivateRoute>} />
                 <Route path='/dashboard/casos/:id/edit' element={<PrivateRoute><UpadateCases /></PrivateRoute>} />
+                <Route path='/dashboard/casos/:id/Document' element={<PrivateRoute><DocumentCases /></PrivateRoute>} />
                 <Route path='/dashboard/users' element={<PrivateRoute><Users /></PrivateRoute>} />
                 <Route path='/dashboard/users/create' element={ <PrivateRoute><CreateUsersForm /></PrivateRoute> } />
                 <Route path='/dashboard/users/:id/edit' element={ <PrivateRoute><UpadateUsers /></PrivateRoute>} />
