@@ -296,8 +296,7 @@ const GetRefrestToken = async () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
-        credentials: "include" // ✅ DEBE estar aquí, no fuera
+        body: JSON.stringify({ email, password })
       });
         if (!resp.ok) {
           
