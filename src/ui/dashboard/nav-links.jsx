@@ -1,7 +1,6 @@
 
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { TfiHome } from "react-icons/tfi";
-import { IoDocumentsOutline } from "react-icons/io5";
 import { Link, useHref } from 'react-router';
 import { PiSuitcaseSimple } from "react-icons/pi";
 import { AiOutlineBranches } from "react-icons/ai";
@@ -9,7 +8,6 @@ import { AiOutlineBranches } from "react-icons/ai";
 
 const links = [
     { name: 'Inicio', href: '/dashboard', icon: TfiHome },
-    {name: 'Facturas',href: '/dashboard/invoices',icon: IoDocumentsOutline,},
     { name: 'Clientes', href: '/dashboard/customers', icon: HiOutlineUserGroup },
     { name: 'Casos', href: '/dashboard/casos', icon: PiSuitcaseSimple },
     { name: 'Usuarios', href: '/dashboard/users', icon: HiOutlineUserGroup },

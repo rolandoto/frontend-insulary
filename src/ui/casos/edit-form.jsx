@@ -26,6 +26,7 @@ export default function EditCasesForm({ cases }) {
     const fechaaviso = new Date(cases.fecha_aviso);
     const fechaAsignacion = new Date(cases.fecha_asignacion);
 
+    
 
   return (
     <form action={formAction}>
@@ -41,6 +42,7 @@ export default function EditCasesForm({ cases }) {
               name="clientId"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               aria-describedby="client-error"
+              defaultValue={cases.idcliente}
               onChange={(e) => {
                 // Filtrar sucursales cuando cambie el cliente
                 const selectedClientId = e.target.value;
@@ -95,7 +97,7 @@ export default function EditCasesForm({ cases }) {
               defaultValue={cases.id_estado}
               >
               <option value="" disabled>
-                Seleccione el intermediario
+                Seleccione el estado
               </option>
               {casosEstados.map((casos) => (
                 <option key={casos.id} value={casos.id}>
@@ -162,6 +164,7 @@ export default function EditCasesForm({ cases }) {
               name="intermediaryId"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               aria-describedby="intermediary-error"
+              defaultValue={cases.idintermediario}
             >
               <option value="" disabled>
                 Seleccione el intermediario
@@ -208,7 +211,6 @@ export default function EditCasesForm({ cases }) {
               ))}
           </div>
         </div>
-    
     
         <div className="relative flex items-center justify-center">
           <div className="flex-grow border-t border-black"></div>
@@ -906,6 +908,142 @@ export default function EditCasesForm({ cases }) {
               ))}
           </div>
         </div>
+
+
+ <div className="mb-4 mt-5">
+      <label htmlFor="generador_carga" className="mb-2 block text-sm font-medium">
+       Generador de carga
+      </label>
+      <div className="relative mt-2 rounded-md">
+        <input
+          id="generador_carga"
+          name="generador_carga"
+          type="text"
+          placeholder="Ingrese la carpeta"
+          className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-1 placeholder:text-gray-500"
+          aria-describedby="generador_carga-error"
+          defaultValue={cases.generador_de_carga}
+        />
+        <CiUser className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+      </div>
+      <div id="generador_carga-error" aria-live="polite" aria-atomic="true">
+        {message.errors?.generador_carga &&
+          message.errors.generador_carga.map((error) => (
+            <p className="mt-2 text-sm text-red-500" key={error}>
+              {error}
+            </p>
+          ))}
+      </div>
+    </div>
+
+    <div className="mb-4 mt-5">
+      <label htmlFor="litisoft" className="mb-2 block text-sm font-medium">
+       Litisoft
+      </label>
+      <div className="relative mt-2 rounded-md">
+        <input
+          id="litisoft"
+          name="litisoft"
+          type="text"
+          placeholder="Ingrese la carpeta"
+          className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-1 placeholder:text-gray-500"
+          aria-describedby="litisoft-error"
+          defaultValue={cases.litisoft}
+        />
+        <CiUser className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+      </div>
+      <div id="litisoft-error" aria-live="polite" aria-atomic="true">
+        {message.errors?.litisoft &&
+          message.errors.litisoft.map((error) => (
+            <p className="mt-2 text-sm text-red-500" key={error}>
+              {error}
+            </p>
+          ))}
+      </div>
+    </div>
+
+
+
+
+        <div className="mb-4 mt-5">
+              <label htmlFor="referencia_uib" className="mb-2 block text-sm font-medium">
+              Referencia uib
+              </label>
+              <div className="relative mt-2 rounded-md">
+                <input
+                  id="referencia_uib"
+                  name="referencia_uib"
+                  type="text"
+                  placeholder="Ingrese la carpeta"
+                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-1 placeholder:text-gray-500"
+                  aria-describedby="referencia_uib-error"
+                  defaultValue={cases.referencia_uib}
+                />
+                <CiUser className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+              </div>
+              <div id="referencia_uib-error" aria-live="polite" aria-atomic="true">
+                {message.errors?.referencia_uib &&
+                  message.errors.referencia_uib.map((error) => (
+                    <p className="mt-2 text-sm text-red-500" key={error}>
+                      {error}
+                    </p>
+                  ))}
+              </div>
+            </div>
+                    <div className="mb-4 mt-5">
+              <label htmlFor="nombre_tercero" className="mb-2 block text-sm font-medium">
+              Nombre tercero
+              </label>
+              <div className="relative mt-2 rounded-md">
+                <input
+                  id="nombre_tercero"
+                  name="nombre_tercero"
+                  type="text"
+                  placeholder="Ingrese la carpeta"
+                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-1 placeholder:text-gray-500"
+                  aria-describedby="nombre_tercero-error"
+                  defaultValue={cases.nombre_tercero}
+                />
+                <CiUser className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+              </div>
+              <div id="nombre_tercero-error" aria-live="polite" aria-atomic="true">
+                {message.errors?.nombre_tercero &&
+                  message.errors.nombre_tercero.map((error) => (
+                    <p className="mt-2 text-sm text-red-500" key={error}>
+                      {error}
+                    </p>
+                  ))}
+              </div>
+            </div>
+
+
+            <div className="mb-4 mt-5">
+              <label htmlFor="apoderado" className="mb-2 block text-sm font-medium">
+                Apoderado
+              </label>
+              <div className="relative mt-2 rounded-md">
+                <input
+                  id="apoderado"
+                  name="apoderado"
+                  type="text"
+                  placeholder="Ingrese la carpeta"
+                  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-1 placeholder:text-gray-500"
+                  aria-describedby="apoderado-error"
+                  defaultValue={cases.apoderado}
+                />
+                <CiUser className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+              </div>
+              <div id="apoderado-error" aria-live="polite" aria-atomic="true">
+                {message.errors?.apoderado &&
+                  message.errors.apoderado.map((error) => (
+                    <p className="mt-2 text-sm text-red-500" key={error}>
+                      {error}
+                    </p>
+                  ))}
+              </div>
+            </div>
+
+
       </div>
       <div className="mt-6 flex justify-end gap-4">
         <Link

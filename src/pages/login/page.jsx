@@ -8,9 +8,6 @@ import useValidation from '../../hooks/useValidation';
 import { IoKeyOutline } from "react-icons/io5";
 import { CiUser } from "react-icons/ci";
 
-
-
-
 const useFormValues = () => {
 
   const [formValues, setFormValues] = useState({
@@ -27,7 +24,7 @@ const useFormValues = () => {
 };
 
 export default function LoginPage() {
-  const { login, isLogin, isLoading,isError } = UseUsers();
+  const { login,isError } = UseUsers();
   const [formValues, handleChange] = useFormValues();
   const validate = useValidation()
   const [formErrors, setFormErrors] = useState({});
@@ -41,8 +38,6 @@ export default function LoginPage() {
     }
   };
 
-
- 
 
   return (
     <main className="flex items-center justify-center md:h-screen">
@@ -100,15 +95,12 @@ export default function LoginPage() {
                 placeholder="Contraseña"
                 minLength={6}
                 />
-                                   <IoKeyOutline className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-
-       
-
+            <IoKeyOutline className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
             {formErrors?.password &&
-                  <p className="mt-2 text-sm text-red-500" >
-                    {formErrors.password}
-                  </p>}
+              <p className="mt-2 text-sm text-red-500" >
+                {formErrors.password}
+              </p>}
 
             {isError&& <p className="mt-2 text-sm text-red-500" >
                       No estas registrado
@@ -124,14 +116,10 @@ export default function LoginPage() {
         <div
             className="flex h-8 items-end space-x-1"
             aria-live="polite"
-            aria-atomic="true"
-        >
-        
+            aria-atomic="true">
         </div>
         </div>
       </form>
-    
-       
       </div>
     </main>
   );

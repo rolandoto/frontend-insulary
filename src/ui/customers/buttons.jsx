@@ -188,6 +188,19 @@ export function UpdateCustomers({ id }) {
   
 
 
+  export function BackLogin( ) {
+    return (
+      <Link
+        to={`/`}
+        className="text-blue-600 hover:underline font-medium"
+      >
+         ¿No recibiste el código?{" "} 
+     
+      </Link>
+    );
+  }
+  
+
 export function DeleteInvoice({ id }) {
 
 

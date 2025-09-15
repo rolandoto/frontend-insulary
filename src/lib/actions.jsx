@@ -616,6 +616,11 @@ export async function createbranches(token,prevState, formData) {
         Siniestro: z.string().nonempty('Por favor, ingresa un Sini  estro.'),
         Placa_Tercero: z.string().nonempty('Por favor, ingresa una Placa Tercero.'),
         Carpeta: z.string().nonempty('Por favor, ingresa una Carpeta. '),
+        generador_carga:z.string().nonempty('Por favor, ingresa Generador de carga. '),
+        litisoft:z.string().nonempty('Por favor, ingresa litisoft. '),
+        referencia_uib:z.string().nonempty('Por favor, ingresa referencia uib. '),
+        nombre_tercero:z.string().nonempty('Por favor, Nombre tercero '),
+        apoderado:z.string().nonempty('Por favor, Nombre Apoderado '),
       });
 
   export async function createCases(token,prevState, formData) {
@@ -652,6 +657,11 @@ export async function createbranches(token,prevState, formData) {
         Siniestro: formData.get("Siniestro"),
         Placa_Tercero: formData.get("Placa_Tercero"),
         Carpeta: formData.get("Carpeta"),
+        generador_carga:formData.get("generador_carga"),
+        litisoft:formData.get("litisoft"),
+        referencia_uib:formData.get("referencia_uib"),
+        nombre_tercero:formData.get("nombre_tercero"),
+        apoderado:formData.get("apoderado"),
     });
 
     if (!validatedFields.success) {
@@ -660,8 +670,41 @@ export async function createbranches(token,prevState, formData) {
         message: 'Hay campos inválidos.',
       };
     }
-  const {clientId, branchId, intermediaryId, allocator, nameAsegurado, typeDocument_asegurado, Document_asegurado, telefono_asegurado, addres_asegurado, correo_asegurado, poliza_asegurado, ramo_asegurado, amparos_asegurado, name_tomador, typeDocument_tomador, Document_tomador, telefono_tomador, addres_tomador, correo_tomador, fechaSiniestro_tomador, fechaAviso_tomador, fechaAsignacion_tomador, relato_hechos, Caso, Placa_Asegurada, Valor_Reserva, Valor_Indemnización, Siniestro, Placa_Tercero, Carpeta}  = validatedFields.data
-
+  const {clientId,
+         branchId,
+        intermediaryId,
+        allocator, 
+        nameAsegurado,
+        typeDocument_asegurado, 
+        Document_asegurado,
+        telefono_asegurado, 
+        addres_asegurado, 
+        correo_asegurado, 
+        poliza_asegurado, 
+        ramo_asegurado, 
+        amparos_asegurado, 
+        name_tomador, 
+        typeDocument_tomador, 
+        Document_tomador, 
+        telefono_tomador, 
+        addres_tomador, 
+        correo_tomador, 
+        fechaSiniestro_tomador, 
+        fechaAviso_tomador, 
+        fechaAsignacion_tomador, 
+        relato_hechos, 
+        Caso, 
+        Placa_Asegurada, 
+        Valor_Reserva, 
+        Valor_Indemnización, 
+        Siniestro, 
+        Placa_Tercero, 
+        Carpeta,
+        generador_carga,
+        litisoft,
+        referencia_uib,
+        nombre_tercero,
+        apoderado}  = validatedFields.data
 
        try {
    
@@ -671,7 +714,13 @@ export async function createbranches(token,prevState, formData) {
               "Content-Type": "application/json",
               'Authorization': `Bearer ${token}`, // ← Aquí va el token correctamente
             },
-            body: JSON.stringify({clientId, branchId, intermediaryId, allocator, nameAsegurado, typeDocument_asegurado, Document_asegurado, telefono_asegurado, addres_asegurado, correo_asegurado, poliza_asegurado, ramo_asegurado, amparos_asegurado, name_tomador, typeDocument_tomador, Document_tomador, telefono_tomador, addres_tomador, correo_tomador, fechaSiniestro_tomador, fechaAviso_tomador, fechaAsignacion_tomador, relato_hechos, Caso, Placa_Asegurada, Valor_Reserva, Valor_Indemnización, Siniestro, Placa_Tercero, Carpeta}),
+            body: JSON.stringify({clientId, branchId, intermediaryId, allocator, nameAsegurado, typeDocument_asegurado, Document_asegurado, telefono_asegurado, addres_asegurado, correo_asegurado, poliza_asegurado, ramo_asegurado, amparos_asegurado, name_tomador, typeDocument_tomador, Document_tomador, telefono_tomador, addres_tomador, correo_tomador, fechaSiniestro_tomador, fechaAviso_tomador, fechaAsignacion_tomador, relato_hechos, Caso, Placa_Asegurada, Valor_Reserva, Valor_Indemnización, Siniestro, Placa_Tercero, Carpeta,
+                                generador_carga,
+                                litisoft,
+                                referencia_uib,
+                                nombre_tercero,
+                                apoderado
+            }),
           });
           if (!res.ok) {
             const response = await res.json();
@@ -746,11 +795,21 @@ export async function createbranches(token,prevState, formData) {
   Placa_Tercero: formData.get("Placa_Tercero"),
   Valor_Reserva: formData.get("Valor_Reserva"),
   Valor_Indemnización: formData.get("Valor_Indemnización"),
-
   Carpeta: formData.get("Carpeta"),
+  generador_carga:formData.get("generador_carga"),
+  litisoft:formData.get("litisoft"),
+  referencia_uib:formData.get("referencia_uib"),
+  nombre_tercero:formData.get("nombre_tercero"),
+  apoderado:formData.get("apoderado"),
 };
     
-    const {estadosCasos,clientId, branchId, intermediaryId, allocator, nameAsegurado, typeDocument_asegurado, Document_asegurado, telefono_asegurado, addres_asegurado, correo_asegurado, poliza_asegurado, ramo_asegurado, amparos_asegurado, name_tomador, typeDocument_tomador, Document_tomador, telefono_tomador, addres_tomador, correo_tomador, fechaSiniestro_tomador, fechaAviso_tomador, fechaAsignacion_tomador, relato_hechos, Caso, Placa_Asegurada, Valor_Reserva, Valor_Indemnización, Siniestro, Placa_Tercero, Carpeta}  = payload
+    const {estadosCasos,clientId, branchId, intermediaryId, allocator, nameAsegurado, typeDocument_asegurado, Document_asegurado, telefono_asegurado, addres_asegurado, correo_asegurado, poliza_asegurado, ramo_asegurado, amparos_asegurado, name_tomador, typeDocument_tomador, Document_tomador, telefono_tomador, addres_tomador, correo_tomador, fechaSiniestro_tomador, fechaAviso_tomador, fechaAsignacion_tomador, relato_hechos, Caso, Placa_Asegurada, Valor_Reserva, Valor_Indemnización, Siniestro, Placa_Tercero, Carpeta,
+       generador_carga,
+                                litisoft,
+                                referencia_uib,
+                                nombre_tercero,
+                                apoderado
+    }  = payload
     
 
     try {
@@ -761,7 +820,13 @@ export async function createbranches(token,prevState, formData) {
               "Content-Type": "application/json",
               'Authorization': `Bearer ${token}`, // ← Aquí va el token correctamente
             },
-            body: JSON.stringify({id,estadosCasos,clientId, branchId, intermediaryId, allocator, nameAsegurado, typeDocument_asegurado, Document_asegurado, telefono_asegurado, addres_asegurado, correo_asegurado, poliza_asegurado, ramo_asegurado, amparos_asegurado, name_tomador, typeDocument_tomador, Document_tomador, telefono_tomador, addres_tomador, correo_tomador, fechaSiniestro_tomador, fechaAviso_tomador, fechaAsignacion_tomador, relato_hechos, Caso, Placa_Asegurada, Valor_Reserva, Valor_Indemnización, Siniestro, Placa_Tercero, Carpeta}),
+            body: JSON.stringify({id,estadosCasos,clientId, branchId, intermediaryId, allocator, nameAsegurado, typeDocument_asegurado, Document_asegurado, telefono_asegurado, addres_asegurado, correo_asegurado, poliza_asegurado, ramo_asegurado, amparos_asegurado, name_tomador, typeDocument_tomador, Document_tomador, telefono_tomador, addres_tomador, correo_tomador, fechaSiniestro_tomador, fechaAviso_tomador, fechaAsignacion_tomador, relato_hechos, Caso, Placa_Asegurada, Valor_Reserva, Valor_Indemnización, Siniestro, Placa_Tercero, Carpeta,
+               generador_carga,
+                                litisoft,
+                                referencia_uib,
+                                nombre_tercero,
+                                apoderado
+            }),
           });
           if (!res.ok) {
             const response = await res.json();

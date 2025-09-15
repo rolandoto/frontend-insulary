@@ -26,6 +26,7 @@ import Text from "./pages/text"
 import CreateCasesForm from "./pages/casos/Create/page"
 import UpadateCases from "./pages/casos/update/page"
 import DocumentCases from "./pages/casos/Document/page"
+import ConfirmCodePage from "./pages/login/ConfirmCodePage"
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
           <BrowserRouter>
               <Routes>
                 <Route  path='/' element={ < PublicRoute><LoginPage /></PublicRoute>  } />
+                <Route  path='/ConfirmeCode' element={ < PublicRoute><ConfirmCodePage /></PublicRoute>  } />
                 <Route path='/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute> } />
                 <Route path='/dashboard/customers' element={<PrivateRoute><Customers /></PrivateRoute> } />
                 <Route path='dashboard/customers/create' element={ <PrivateRoute><CreateForm /></PrivateRoute> } />

@@ -312,6 +312,28 @@ const GetRefrestToken = async () => {
   };
 
 
+
+   const LoginVerifyCode = async ({ code }) => {
+    try {
+      const resp = await fetch(`${config.serverRoute}/api/admin/VerifyCode`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({code}),
+        credentials: "include"
+      });
+        if (!resp.ok) {
+          throw new Error('Response is not ok');
+        }
+        const data = await resp.json();
+        return data
+      } catch (error) {
+        throw error; // You can re-throw the error or handle it differently based on your needs
+      }
+  };
+
+
    const Alldashboard = async ({token}) => {
     try {
       const resp = await fetch(`${config.serverRoute}/api/client/AllDashboard`, {
@@ -698,5 +720,6 @@ const GetRefrestToken = async () => {
     FetchPostUpdateCasos,
     FetchPosStateCasos,
     fetchCasosDocument,
-    fetchDocument
+    fetchDocument,
+    LoginVerifyCode
   }
