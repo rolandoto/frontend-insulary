@@ -1,6 +1,6 @@
 
 import { useSearchParams } from "react-router";
-import { CreateBranches, CreateIntermederies, DownloadExcel } from "../../ui/customers/buttons";
+import { CreateBranches, DownloadExcel } from "../../ui/customers/buttons";
 import Layout from "../dashboard/layout"
 import { useSelector } from "react-redux";
 import Search from "../../ui/customers/search";
