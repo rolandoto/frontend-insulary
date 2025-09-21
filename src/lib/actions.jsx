@@ -512,19 +512,12 @@ export async function createbranches(token,prevState, formData) {
           };
 
     } catch (err) {
-      console.log(err)
       toast.error("Algo paso en el sistema")
       return {
           message:"error en el sistem"
+      }
     }
-  }
-  
-  }
-
-
-
-  
-
+    }
 
   export async function updatebranches(id,token,prevState, formData) {
   
@@ -585,7 +578,6 @@ export async function createbranches(token,prevState, formData) {
 
 
   const FormSchemaCases= z.object({
-    
         clientId: z.string().nonempty('Por favor, ingresa un nombre completo.'),
         branchId: z.string().nonempty('Por favor, ingresa un número de codigo.'),
         intermediaryId: z.string().nonempty('Por favor, ingresa una dirección.'),
@@ -623,10 +615,12 @@ export async function createbranches(token,prevState, formData) {
         apoderado:z.string().nonempty('Por favor, Nombre Apoderado '),
       });
 
+  const branches= FormSchemaCases.omit({ id: true, date: true,litisoft:true,referencia_uib:true,nombre_tercero:true,apoderado:true});
+
   export async function createCases(token,prevState, formData) {
     
   
-    const validatedFields = FormSchemaCases.safeParse({
+    const validatedFields = branches.safeParse({
         clientId: formData.get("clientId"),
         branchId: formData.get("branchId"),
         intermediaryId: formData.get("intermediaryId"),

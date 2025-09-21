@@ -3,7 +3,7 @@
 import { CiUser } from "react-icons/ci";
 import { Link } from "react-router";
 import { Button } from "../button";
-import {  createbranches, createCases } from "../../lib/actions";
+import {  createCases } from "../../lib/actions";
 import { useActionState, useEffect } from "react";
 import { Toaster } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,7 +32,6 @@ export default function Form( ) {
      const [message, formAction, isPending] = useActionState(createWithToken,initialState);
     const {fetchRamos,fetchAmparos} =ActionsRamos()
 
-
       useEffect(() => {
             PostClient({query:"",currentPage:1,token:accessToken}),
             PostIntermederies({query:"",currentPage:1,token:accessToken}),
@@ -45,12 +44,10 @@ export default function Form( ) {
   return (
    <form action={formAction}>
     <Toaster richColors position="top-center" />
-
-    
     <div className="rounded-md bg-gray-50 p-4 md:p-6">
     <div className="mb-4">
       <label htmlFor="clientId" className="mb-2 block text-sm font-medium">
-        Cliente / Aseguradora 
+        Cliente / Aseguradora  <span className="text-red-500">*</span>
       </label>
       <div className="relative">
         <select
@@ -103,46 +100,50 @@ export default function Form( ) {
 
     
    
-    <div className="mb-4">
-      <label htmlFor="branchId" className="mb-2 block text-sm font-medium">
-        Sucursal
-      </label>
-      <div className="relative">
-        <select
-          id="branchId"
-          name="branchId"
-          className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-          aria-describedby="branch-error"
+  <div className="mb-4">
+  <label
+    htmlFor="branchId"
+    className="mb-2 block text-sm font-medium"
+  >
+    Sucursal <span className="text-red-500">*</span>
+  </label>
+  <div className="relative">
+    <select
+      id="branchId"
+      name="branchId"
+      required
+      className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+      aria-describedby="branch-error"
+    >
+      <option value="" disabled>
+        Seleccione la sucursal
+      </option>
+      {branchesFilter.map((branch,e) => (
+        <option 
+          key={e} 
+          value={branch.id}
+          data-client-id={branch.clientId}
+          style={{display: 'none'}} // Inicialmente ocultas
         >
-          <option value="" disabled>
-            Seleccione la sucursal
-          </option>
-          {branchesFilter.map((branch) => (
-            <option 
-              key={branch.id} 
-              value={branch.id}
-              data-client-id={branch.clientId}
-              style={{display: 'none'}} // Inicialmente ocultas
-            >
-              {branch.nombre}
-            </option>
-          ))}
-        </select>
-        <HiOutlineUserCircle className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
-      </div>
-      <div id="branch-error" aria-live="polite" aria-atomic="true">
-        {message.errors?.branchId &&
-          message.errors.branchId.map((error) => (
-            <p className="mt-2 text-sm text-red-500" key={error}>
-              {error}
-            </p>
-          ))}
-      </div>
-    </div>
+          {branch.nombre}
+        </option>
+      ))}
+    </select>
+    <HiOutlineUserCircle className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+  </div>
+  <div id="branch-error" aria-live="polite" aria-atomic="true">
+    {message.errors?.branchId &&
+      message.errors.branchId.map((error) => (
+        <p className="mt-2 text-sm text-red-500" key={error}>
+          {error}
+        </p>
+      ))}
+  </div>
+</div>
 
     <div className="mb-4">
       <label htmlFor="intermediaryId" className="mb-2 block text-sm font-medium">
-      Intermediario
+      Intermediario <span className="text-red-500">*</span>
       </label>
       <div className="relative">
         <select
@@ -174,7 +175,7 @@ export default function Form( ) {
 
     <div className="mb-4">
       <label htmlFor="name" className="mb-2 block text-sm font-medium">
-        Asignador 
+        Asignador <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -197,14 +198,14 @@ export default function Form( ) {
     </div>
 
 
-    <div class="relative flex items-center justify-center">
-      <div class="flex-grow border-t border-black"></div>
-        <span class="mx-4 bg-white px-3 text-sm font-medium text-black">ASEGURADO</span>
-      <div class="flex-grow border-t border-black"></div>
+    <div className="relative flex items-center justify-center">
+      <div className="flex-grow border-t border-black"></div>
+        <span className="mx-4 bg-white px-3 text-sm font-medium text-black">ASEGURADO</span>
+      <div className="flex-grow border-t border-black"></div>
     </div>
     <div className="mb-4 mt-4">
       <label htmlFor="nameAsegurado" className="mb-2 block text-sm font-medium">
-        Nombres
+        Nombres  <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -227,7 +228,7 @@ export default function Form( ) {
     </div>
     <div className="mb-4">
       <label htmlFor="typeDocument_asegurado" className="mb-2 block text-sm font-medium">
-      Tipo de documento
+      Tipo de documento <span className="text-red-500">*</span>
       </label>
       <div className="relative">
         <select
@@ -258,7 +259,7 @@ export default function Form( ) {
     </div>
     <div className="mb-4">
       <label htmlFor="Document_asegurado" className="mb-2 block text-sm font-medium">
-        Numero de documento
+        Numero de documento <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -281,8 +282,8 @@ export default function Form( ) {
     </div>
     <div className="mb-4">
       <label htmlFor="telefono_asegurado" className="mb-2 block text-sm font-medium">
-        Teléfono
-      </label>
+        Teléfono  <span className="text-red-500">*</span>
+      </label> 
       <div className="relative mt-2 rounded-md">
         <input
           id="telefono_asegurado"
@@ -304,7 +305,7 @@ export default function Form( ) {
     </div>
   <div className="mb-4">
       <label htmlFor="addres_asegurado" className="mb-2 block text-sm font-medium">
-        Dirección
+        Dirección <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -327,7 +328,7 @@ export default function Form( ) {
     </div>
     <div className="mb-4">
       <label htmlFor="correo_asegurado" className="mb-2 block text-sm font-medium">
-        Correo
+        Correo <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -352,7 +353,7 @@ export default function Form( ) {
 
     <div className="mb-4">
       <label htmlFor="poliza_asegurado" className="mb-2 block text-sm font-medium">
-        Poliza Afectada
+        Poliza Afectada <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -376,7 +377,7 @@ export default function Form( ) {
 
       <div className="mb-4">
       <label htmlFor="ramo_asegurado" className="mb-2 block text-sm font-medium">
-        Ramo
+        Ramo <span className="text-red-500">*</span>
       </label>
       <div className="relative">
         <select
@@ -407,7 +408,7 @@ export default function Form( ) {
     </div>
     <div className="mb-4">
       <label htmlFor="amparos_asegurado" className="mb-2 block text-sm font-medium">
-        Amparos
+        Amparos <span className="text-red-500">*</span>
       </label>
       <div className="relative">
         <select
@@ -438,15 +439,15 @@ export default function Form( ) {
     </div>
 
     
-    <div class="relative flex items-center justify-center">
-        <div class="flex-grow border-t border-black"></div>
-          <span class="mx-4 bg-white px-3 text-sm font-medium text-black">TOMADOR</span>
-        <div class="flex-grow border-t border-black"></div>
+    <div className="relative flex items-center justify-center">
+        <div className="flex-grow border-t border-black"></div>
+          <span className="mx-4 bg-white px-3 text-sm font-medium text-black">TOMADOR</span>
+        <div className="flex-grow border-t border-black"></div>
     </div>
 
    <div className="mb-4 mt-4">
       <label htmlFor="name_tomador" className="mb-2 block text-sm font-medium">
-        Nombres
+        Nombres <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -469,7 +470,7 @@ export default function Form( ) {
     </div>
     <div className="mb-4">
       <label htmlFor="typeDocument_tomador" className="mb-2 block text-sm font-medium">
-      Tipo de documento
+      Tipo de documento <span className="text-red-500">*</span>
       </label>
       <div className="relative">
         <select
@@ -500,7 +501,7 @@ export default function Form( ) {
     </div>
     <div className="mb-4">
       <label htmlFor="Document_tomador" className="mb-2 block text-sm font-medium">
-        Numero de documento
+        Numero de documento <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -523,7 +524,7 @@ export default function Form( ) {
     </div>
     <div className="mb-4">
       <label htmlFor="telefono_tomador" className="mb-2 block text-sm font-medium">
-        Teléfono
+        Teléfono <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -546,7 +547,7 @@ export default function Form( ) {
     </div>
   <div className="mb-4">
       <label htmlFor="addres_tomador" className="mb-2 block text-sm font-medium">
-        Dirección
+        Dirección <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -569,8 +570,8 @@ export default function Form( ) {
     </div>
     <div className="mb-4">
       <label htmlFor="correo_tomador" className="mb-2 block text-sm font-medium">
-        Correo
-      </label>
+        Correo <span className="text-red-500">*</span>
+      </label> 
       <div className="relative mt-2 rounded-md">
         <input
           id="correo_tomador"
@@ -592,7 +593,7 @@ export default function Form( ) {
     </div>
     <div className="mb-4">
       <label htmlFor="fechaSiniestro_tomador" className="mb-2 block text-sm font-medium">
-        Fecha de Siniestro
+        Fecha de Siniestro <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -617,7 +618,7 @@ export default function Form( ) {
     </div>
     <div className="mb-4">
       <label htmlFor="fechaAviso_tomador" className="mb-2 block text-sm font-medium">
-        Fecha de Aviso
+        Fecha de Aviso <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -642,7 +643,7 @@ export default function Form( ) {
     </div>
     <div className="mb-4">
       <label htmlFor="fechaAsignacion_tomador" className="mb-2 block text-sm font-medium">
-        Fecha de Asignación
+        Fecha de Asignación <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -666,15 +667,14 @@ export default function Form( ) {
       </div>
     </div>
 
- <div class="relative flex items-center justify-center">
-        <div class="flex-grow border-t border-black"></div>
-       
-        <div class="flex-grow border-t border-black"></div>
+ <div className="relative flex items-center justify-center">
+        <div className="flex-grow border-t border-black"></div>
+        <div className="flex-grow border-t border-black"></div>
     </div>
 
    <div className="mb-4 mt-5">
       <label htmlFor="relato_hechos" className="mb-2 block text-sm font-medium">
-        Relato de los Hechos
+        Relato de los Hechos <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -699,7 +699,7 @@ export default function Form( ) {
 
     <div className="mb-4 mt-5">
       <label htmlFor="Caso" className="mb-2 block text-sm font-medium">
-       Caso
+       Caso <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -724,7 +724,7 @@ export default function Form( ) {
 
 <div className="mb-4 mt-5">
       <label htmlFor="Placa_Asegurada" className="mb-2 block text-sm font-medium">
-       Placa Asegurada
+       Placa Asegurada <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -749,7 +749,7 @@ export default function Form( ) {
 
 <div className="mb-4 mt-5">
       <label htmlFor="Valor_Reserva" className="mb-2 block text-sm font-medium">
-        Valor Reserva
+        Valor Reserva <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -774,7 +774,7 @@ export default function Form( ) {
 
 <div className="mb-4 mt-5">
       <label htmlFor="Valor_Indemnización" className="mb-2 block text-sm font-medium">
-        Valor Indemnización
+        Valor Indemnización <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -799,7 +799,7 @@ export default function Form( ) {
 
 <div className="mb-4 mt-5">
       <label htmlFor="Siniestro" className="mb-2 block text-sm font-medium">
-       Siniestro
+       Siniestro <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -824,7 +824,7 @@ export default function Form( ) {
 
 <div className="mb-4 mt-5">
       <label htmlFor="Placa_Tercero" className="mb-2 block text-sm font-medium">
-       Placa Tercero
+       Placa Tercero <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -849,7 +849,7 @@ export default function Form( ) {
 
     <div className="mb-4 mt-5">
       <label htmlFor="Carpeta" className="mb-2 block text-sm font-medium">
-       Carpeta
+       Carpeta <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -874,7 +874,7 @@ export default function Form( ) {
 
     <div className="mb-4 mt-5">
       <label htmlFor="generador_carga" className="mb-2 block text-sm font-medium">
-       Generador de carga
+       Generador de carga <span className="text-red-500">*</span>
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -921,9 +921,6 @@ export default function Form( ) {
           ))}
       </div>
     </div>
-
-
-
 
         <div className="mb-4 mt-5">
               <label htmlFor="referencia_uib" className="mb-2 block text-sm font-medium">

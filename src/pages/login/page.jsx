@@ -109,7 +109,7 @@ export default function LoginPage() {
             </div>
         </div>
           
-        <input  />
+      
         <Button className="mt-4 w-full">
         Acceder a la cuenta
         </Button>
