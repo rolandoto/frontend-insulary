@@ -871,7 +871,6 @@ export default function Form( ) {
           ))}
       </div>
     </div>
-
     <div className="mb-4 mt-5">
       <label htmlFor="generador_carga" className="mb-2 block text-sm font-medium">
        Generador de carga <span className="text-red-500">*</span>
@@ -896,7 +895,6 @@ export default function Form( ) {
           ))}
       </div>
     </div>
-
     <div className="mb-4 mt-5">
       <label htmlFor="litisoft" className="mb-2 block text-sm font-medium">
        Litisoft
@@ -921,7 +919,6 @@ export default function Form( ) {
           ))}
       </div>
     </div>
-
         <div className="mb-4 mt-5">
               <label htmlFor="referencia_uib" className="mb-2 block text-sm font-medium">
               Referencia uib
@@ -970,8 +967,6 @@ export default function Form( ) {
                   ))}
               </div>
             </div>
-
-
             <div className="mb-4 mt-5">
               <label htmlFor="apoderado" className="mb-2 block text-sm font-medium">
                 Apoderado
@@ -996,11 +991,7 @@ export default function Form( ) {
                   ))}
               </div>
             </div>
-
   </div>
-
-
-  
   <div className="mt-6 flex justify-end gap-4">
     <Link
       to="/dashboard/casos"
