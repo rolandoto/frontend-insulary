@@ -875,7 +875,7 @@ export default function EditCasesForm({ cases }) {
           </div>
           <div id="Placa_Tercero-error" aria-live="polite" aria-atomic="true">
             {message.errors?.Placa_Tercero &&
-              message.errors.fechaAsignacion_tomador.map((error) => (
+              message.errors.Placa_Tercero.map((error) => (
                 <p className="mt-2 text-sm text-red-500" key={error}>
                   {error}
                 </p>

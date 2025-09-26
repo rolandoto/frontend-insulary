@@ -39,7 +39,6 @@ export default function Form( ) {
             fetchRamos({query:"",token:accessToken})
             fetchAmparos({query:"",token:accessToken})
         }, [dispatch]);
-      
   
   return (
    <form action={formAction}>
@@ -839,7 +838,7 @@ export default function Form( ) {
       </div>
       <div id="Placa_Tercero-error" aria-live="polite" aria-atomic="true">
         {message.errors?.Placa_Tercero &&
-          message.errors.fechaAsignacion_tomador.map((error) => (
+          message.errors.Placa_Tercero.map((error) => (
             <p className="mt-2 text-sm text-red-500" key={error}>
               {error}
             </p>
