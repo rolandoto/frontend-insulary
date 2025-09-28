@@ -7,6 +7,7 @@ import {dashboardSlice} from '../reducers/ApiDashboard';
 import {intermediariesSlice} from '../reducers/ApiIntermederies';
 import {branchesSlice} from '../reducers/ApiBranches';
 import {ramosSlice} from '../reducers/ApiRamos';
+import {amparosSlice} from '../reducers/apiAmparos';
 import { configureStore } from '@reduxjs/toolkit';
 
 const store = configureStore ({
@@ -18,7 +19,8 @@ const store = configureStore ({
         dashboard:dashboardSlice.reducer,
         intermederies:intermediariesSlice.reducer,
         branches:branchesSlice.reducer,
-        ramos:ramosSlice.reducer
+        ramos:ramosSlice.reducer,
+        amparos:amparosSlice.reducer
         },
     devTools:true,
 })

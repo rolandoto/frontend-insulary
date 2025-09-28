@@ -28,7 +28,7 @@ const ActionsBranches =() =>{
         dispatch(fetchPagesStart())
         try {
            const response =   await Httpclient.PostBranchesTotalPage({query,token})
-            console.log(response)
+
             if(response){
                 dispatch(fetchPagesSuccess(response)) 
             }else{

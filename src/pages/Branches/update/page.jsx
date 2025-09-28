@@ -22,9 +22,9 @@ const UpadateBranches =() =>{
     const {loading,error} = useSelector((state) => state.clients);
 
      const LazyTable = React.lazy(() =>
-            new Promise((resolve) => {
+        new Promise((resolve) => {
             setTimeout(() => resolve(import("../../../ui/Branches/edit-form")), 500);
-            })
+        })
     );
 
     const fillContent =() =>{
@@ -35,15 +35,15 @@ const UpadateBranches =() =>{
         return <Error />
     }
     
-    return       <Suspense  fallback={<InvoicesTableSkeleton />}>
-                    <LazyTable branches={branchById} />
-                </Suspense>
+    return   <Suspense  fallback={<InvoicesTableSkeleton />}>
+                <LazyTable branches={branchById} />
+            </Suspense>
     }
 
 
     useEffect(() => {
-            PostBranchesById({id,token:accessToken}); // asegúrate de que esto sea un thunk
-             PostClient({query:"",currentPage:1,token:accessToken})
+            PostBranchesById({id,token:accessToken}); 
+            PostClient({query:"",currentPage:1,token:accessToken})
     }, [dispatch]);
 
 

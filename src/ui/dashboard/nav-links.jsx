@@ -5,14 +5,14 @@ import { Link, useHref } from 'react-router';
 import { PiSuitcaseSimple } from "react-icons/pi";
 import { AiOutlineBranches } from "react-icons/ai";
 
-
 const links = [
     { name: 'Inicio', href: '/dashboard', icon: TfiHome },
     { name: 'Clientes', href: '/dashboard/customers', icon: HiOutlineUserGroup },
     { name: 'Casos', href: '/dashboard/casos', icon: PiSuitcaseSimple },
     { name: 'Usuarios', href: '/dashboard/users', icon: HiOutlineUserGroup },
     { name: 'Intermederios', href: '/dashboard/intermederies', icon: HiOutlineUserGroup},
-    { name: 'Sucursales', href: '/dashboard/branches', icon: AiOutlineBranches }
+    { name: 'Sucursales', href: '/dashboard/branches', icon: AiOutlineBranches },
+    { name: 'Amparos', href: '/dashboard/amparos', icon: AiOutlineBranches }
 ];
 
 export default function NavLinks() {

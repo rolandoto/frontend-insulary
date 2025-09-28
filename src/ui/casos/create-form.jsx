@@ -695,10 +695,9 @@ export default function Form( ) {
           ))}
       </div>
     </div>
-
     <div className="mb-4 mt-5">
       <label htmlFor="Caso" className="mb-2 block text-sm font-medium">
-       Caso <span className="text-red-500">*</span>
+       Caso 
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -723,7 +722,7 @@ export default function Form( ) {
 
 <div className="mb-4 mt-5">
       <label htmlFor="Placa_Asegurada" className="mb-2 block text-sm font-medium">
-       Placa Asegurada <span className="text-red-500">*</span>
+       Placa Asegurado 
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -823,7 +822,7 @@ export default function Form( ) {
 
 <div className="mb-4 mt-5">
       <label htmlFor="Placa_Tercero" className="mb-2 block text-sm font-medium">
-       Placa Tercero <span className="text-red-500">*</span>
+       Placa Tercero 
       </label>
       <div className="relative mt-2 rounded-md">
         <input
@@ -872,7 +871,7 @@ export default function Form( ) {
     </div>
     <div className="mb-4 mt-5">
       <label htmlFor="generador_carga" className="mb-2 block text-sm font-medium">
-       Generador de carga <span className="text-red-500">*</span>
+       Generador de carga   
       </label>
       <div className="relative mt-2 rounded-md">
         <input

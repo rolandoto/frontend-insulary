@@ -512,6 +512,100 @@ const GetRefrestToken = async () => {
       };
 
 
+
+      
+     const PostAmparos= async ({query,currentPage,token}) => {
+        try {
+          const resp = await fetch(`${config.serverRoute}/api/amparos/postamparos`, {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({query,currentPage})
+          });
+            if (!resp.ok) {
+              
+              throw new Error('Response is not ok');
+            }
+            const data = await resp.json();
+
+            return data.amparos
+          } catch (error) {
+            throw error; // You can re-throw the error or handle it differently based on your needs
+          }
+      }
+
+
+       const PostAmparosFilter= async ({query,currentPage,token}) => {
+        try {
+          const resp = await fetch(`${config.serverRoute}/api/amparos/postamparos`, {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({query,currentPage})
+          });
+            if (!resp.ok) {
+              
+              throw new Error('Response is not ok');
+            }
+            const data = await resp.json();
+
+            return data.amparosFilter
+          } catch (error) {
+            throw error; // You can re-throw the error or handle it differently based on your needs
+          }
+      }
+
+
+      const fetchAmparosByID = async ({ id, token }) => {
+        try {
+          const resp = await fetch(`${config.serverRoute}/api/amparos/PostAmparosByID`, {
+            method: "POST",
+            body: JSON.stringify({ id }),
+              headers: {
+                "Content-type": "application/json",
+                "Authorization": `Bearer ${token}`,
+              },
+          });
+
+          if (!resp.ok) {
+            throw new Error("Response is not ok");
+          }
+
+          const data = await resp.json();
+          return data.amparos;
+        } catch (error) {
+          throw error; // puedes manejarlo o relanzarlo según la necesidad
+        }
+      };
+
+      
+    const PostAmparosTotalPage = async ({ query, token }) => {
+          try {
+            const resp = await fetch(`${config.serverRoute}/api/amparos/PostAmparosTotalPages`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+              },
+              body: JSON.stringify({ query }),
+            });
+
+            if (!resp.ok) {
+              throw new Error("Response is not ok");
+            }
+
+            const data = await resp.json();
+            return data.totalPages;
+          } catch (error) {
+            throw error; // manejar o relanzar el error según tu necesidad
+          }
+    }
+
+
       
   const fetchBranchesbyID = async ({id,token}) => {
     try {
@@ -601,25 +695,25 @@ const GetRefrestToken = async () => {
 
 
    const fetchRamos = async ({query,token}) => {
-    try {
-        const resp = await fetch(`${config.serverRoute}/api/ramos/PostRamos`, {
-          method: "POST",
-          body: JSON.stringify({query}),
-          headers: {
-              'Content-type': 'application/json',
-               'Authorization': `Bearer ${token}`
-          },
-        });
-        if (!resp.ok) {
-          throw new Error('Response is not ok');
-        }
-        const data = await resp.json();
+      try {
+          const resp = await fetch(`${config.serverRoute}/api/ramos/PostRamos`, {
+            method: "POST",
+            body: JSON.stringify({query}),
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+          });
+          if (!resp.ok) {
+            throw new Error('Response is not ok');
+          }
+          const data = await resp.json();
 
-        return data.ramosFilter
-      } catch (error) {
-        throw error; // You can re-throw the error or handle it differently based on your needs
-      }
-  };
+          return data.ramosFilter
+        } catch (error) {
+          throw error; // You can re-throw the error or handle it differently based on your needs
+        }
+    };
 
 
   const fetchAmparos = async ({query,token}) => {
@@ -644,48 +738,48 @@ const GetRefrestToken = async () => {
   };
 
 
-   const fetchCasosDocument = async ({id,token}) => {
-    try {
-        const resp = await fetch(`${config.serverRoute}/api/client/PostCasesDocumentByID`, {
-          method: "POST",
-          body: JSON.stringify({id}),
-          headers: {
-              'Content-type': 'application/json',
-               'Authorization': `Bearer ${token}`
-          },
-        });
-        if (!resp.ok) {
-          throw new Error('Response is not ok');
-        }
-        const data = await resp.json();
+      const fetchCasosDocument = async ({id,token}) => {
+          try {
+              const resp = await fetch(`${config.serverRoute}/api/client/PostCasesDocumentByID`, {
+                method: "POST",
+                body: JSON.stringify({id}),
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+              });
+              if (!resp.ok) {
+                throw new Error('Response is not ok');
+              }
+              const data = await resp.json();
 
-        return data.estadosCasos
-      } catch (error) {
-        throw error; 
-      }
-  };
+              return data.estadosCasos
+            } catch (error) {
+              throw error; 
+            }
+      };
 
 
-     const fetchDocument = async ({id,token}) => {
-    try {
-        const resp = await fetch(`${config.serverRoute}/api/client/documentIDCaso`, {
-          method: "POST",
-          body: JSON.stringify({id}),
-          headers: {
-              'Content-type': 'application/json',
-               'Authorization': `Bearer ${token}`
-          },
-        });
-        if (!resp.ok) {
-          throw new Error('Response is not ok');
-        }
-        const data = await resp.json();
+    const fetchDocument = async ({id,token}) => {
+          try {
+              const resp = await fetch(`${config.serverRoute}/api/client/documentIDCaso`, {
+                method: "POST",
+                body: JSON.stringify({id}),
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+              });
+              if (!resp.ok) {
+                throw new Error('Response is not ok');
+              }
+              const data = await resp.json();
 
-        return data.document
-      } catch (error) {
-        throw error; 
-      }
-  };
+              return data.document
+            } catch (error) {
+              throw error; 
+            }
+      };
 
 
   export default {
@@ -720,5 +814,9 @@ const GetRefrestToken = async () => {
     FetchPosStateCasos,
     fetchCasosDocument,
     fetchDocument,
-    LoginVerifyCode
+    LoginVerifyCode,
+    PostAmparos,
+    PostAmparosTotalPage,
+    PostAmparosFilter,
+    fetchAmparosByID
   }

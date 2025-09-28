@@ -411,11 +411,8 @@ export async function updateIntermederies(id,token,prevState, formData) {
       };
     }
 
-
-    
     const {name,document,addres,tipo,telefono,email}  = validatedFields.data
     
-
     try {
    
        const res = await fetch(`${config.serverRoute}/api/intermederies/PostUpdateIntermederies`, {
@@ -615,7 +612,16 @@ export async function createbranches(token,prevState, formData) {
         apoderado:z.string().nonempty('Por favor, Nombre Apoderado '),
       });
 
-  const branches= FormSchemaCases.omit({ id: true, date: true,litisoft:true,referencia_uib:true,nombre_tercero:true,apoderado:true});
+  const branches= FormSchemaCases.omit({ id: true, 
+                                          date: true,
+                                          litisoft:true,
+                                          referencia_uib:true,
+                                          nombre_tercero:true,
+                                          apoderado:true,
+                                          Caso:true,
+                                          generador_carga:true,
+                                          Placa_Tercero:true,
+                                          Placa_Asegurada:true});
 
   export async function createCases(token,prevState, formData) {
     
@@ -927,3 +933,113 @@ const documentUload= FormSchemaDocument.omit({ id: true, date: true });
   }
   
   }
+  const FormSchemaAmparos = z.object({
+  name: z.string().nonempty('Por favor, ingresa un nombre completo.'),
+});
+
+export async function updateAmparos(id,token,prevState, formData) {
+
+    const validatedFields = FormSchemaAmparos.safeParse({
+          name: formData.get("name")
+    });
+  
+    if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+        message: 'Hay campos inválidos.',
+      };
+    }
+
+    const {name}  = validatedFields.data
+    
+    try {
+          const res = await fetch(`${config.serverRoute}/api/amparos/PostUpdateAmparos`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+          body: JSON.stringify({ name, id }),
+        });
+          if (!res.ok) {
+            const response = await res.json();
+            toast.error(response.msg || 'Error al registrar cliente.');
+            return {
+                success: false,
+                message: response.msg || 'Error al registrar cliente.',
+                errors: response.errors ,
+              };
+          }
+              const responseData = await res.json();
+              
+              toast.success("guardado correctamente")
+              return {
+                message: " creado exitosamente",
+                data: responseData,
+      };
+
+    } catch (err) {
+      console.log({err})
+      toast.error("Algo paso en el sistema")
+      return {
+          message:"error en el sistem"
+    }
+  }
+  
+}
+
+
+export async function createAmparos(token,prevState, formData) {
+
+    const validatedFields = FormSchemaAmparos.safeParse({
+          name: formData.get("name")
+    });
+  
+    if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+        message: 'Hay campos inválidos.',
+      };
+    }
+
+    const {name}  = validatedFields.data
+    
+    try {
+
+        const res = await fetch(`${config.serverRoute}/api/amparos/PostCreateAmparos`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+          body: JSON.stringify({ name}),
+        });
+          if (!res.ok) {
+            const response = await res.json();
+            toast.error(response.msg || 'Error al registrar cliente.');
+            return {
+                success: false,
+                message: response.msg || 'Error al registrar cliente.',
+                errors: response.errors ,
+              };
+          }
+              const responseData = await res.json();
+              
+              toast.success("guardado correctamente")
+              return {
+                message: " creado exitosamente",
+                data: responseData,
+      };
+
+    } catch (err) {
+      console.log({err})
+      toast.error("Algo paso en el sistema")
+      return {
+          message:"error en el sistem"
+    }
+  }
+  
+}
+
+  
+

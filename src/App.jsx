@@ -27,6 +27,9 @@ import CreateCasesForm from "./pages/casos/Create/page"
 import UpadateCases from "./pages/casos/update/page"
 import DocumentCases from "./pages/casos/Document/page"
 import ConfirmCodePage from "./pages/login/ConfirmCodePage"
+import Amparos from "./pages/amparos/page"
+import UpadateAmparos from "./pages/amparos/update/page"
+import CreateAmparosForm from "./pages/amparos/create/page"
 
 function App() {
 
@@ -55,6 +58,9 @@ function App() {
                 <Route path='/dashboard/branches' element={ <PrivateRoute><Branches/></PrivateRoute>} />
                 <Route path='/dashboard/branches/create' element={ <PrivateRoute><CreateBranchesForm/></PrivateRoute>} />
                 <Route path='/dashboard/branches/:id/edit' element={ <PrivateRoute><UpadateBranches/></PrivateRoute>} />
+                <Route path='/dashboard/amparos' element={ <PrivateRoute><Amparos/></PrivateRoute>} />
+                <Route path='/dashboard/amparos/:id/edit' element={ <PrivateRoute><UpadateAmparos/></PrivateRoute>} />
+                 <Route path='/dashboard/amparos/create' element={ <PrivateRoute><CreateAmparosForm/></PrivateRoute>} />
                 <Route path='/text' element={ <Text/>} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
