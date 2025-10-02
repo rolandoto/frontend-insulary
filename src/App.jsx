@@ -30,6 +30,9 @@ import ConfirmCodePage from "./pages/login/ConfirmCodePage"
 import Amparos from "./pages/amparos/page"
 import UpadateAmparos from "./pages/amparos/update/page"
 import CreateAmparosForm from "./pages/amparos/create/page"
+import Ramos from "./pages/ramos/page"
+import UpadateRamos from "./pages/ramos/update/page"
+import CreateRamosForm from "./pages/ramos/create/page"
 
 function App() {
 
@@ -60,7 +63,10 @@ function App() {
                 <Route path='/dashboard/branches/:id/edit' element={ <PrivateRoute><UpadateBranches/></PrivateRoute>} />
                 <Route path='/dashboard/amparos' element={ <PrivateRoute><Amparos/></PrivateRoute>} />
                 <Route path='/dashboard/amparos/:id/edit' element={ <PrivateRoute><UpadateAmparos/></PrivateRoute>} />
-                 <Route path='/dashboard/amparos/create' element={ <PrivateRoute><CreateAmparosForm/></PrivateRoute>} />
+                <Route path='/dashboard/amparos/create' element={ <PrivateRoute><CreateAmparosForm/></PrivateRoute>} />
+                <Route path='/dashboard/ramos' element={ <PrivateRoute><Ramos/></PrivateRoute>} />
+                <Route path='/dashboard/ramos/:id/edit' element={ <PrivateRoute><UpadateRamos/></PrivateRoute>} />
+                <Route path='/dashboard/ramos/create' element={ <PrivateRoute><CreateRamosForm  Form/></PrivateRoute>} />
                 <Route path='/text' element={ <Text/>} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

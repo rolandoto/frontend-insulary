@@ -12,7 +12,8 @@ const links = [
     { name: 'Usuarios', href: '/dashboard/users', icon: HiOutlineUserGroup },
     { name: 'Intermederios', href: '/dashboard/intermederies', icon: HiOutlineUserGroup},
     { name: 'Sucursales', href: '/dashboard/branches', icon: AiOutlineBranches },
-    { name: 'Amparos', href: '/dashboard/amparos', icon: AiOutlineBranches }
+    { name: 'Amparos', href: '/dashboard/amparos', icon: AiOutlineBranches },
+    { name: 'Ramos', href: '/dashboard/ramos', icon: AiOutlineBranches }
 ];
 
 export default function NavLinks() {

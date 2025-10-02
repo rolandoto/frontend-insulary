@@ -3,19 +3,17 @@
 import { CiUser } from "react-icons/ci";
 import { Link } from "react-router";
 import { Button } from "../button";
-import {  updateAmparos, updateIntermederies } from "../../lib/actions";
+import {createRamos} from "../../lib/actions";
 import { useActionState } from "react";
 import { Toaster } from "sonner";
 import { useSelector } from "react-redux";
 
-export default function EditIntermederiesForm({ amparosById }) {
-
-    
+export default function Form() {
   const { accessToken} = useSelector(
     (state) => state.Refrestoken
   );  
     const initialState ={message:"",errors:{}};
-    const updateWithId = updateAmparos.bind(null,amparosById.id,accessToken);
+    const updateWithId = createRamos.bind(null,accessToken);
     const [message, formAction, isPending] = useActionState(updateWithId,initialState);
 
     return (
@@ -31,7 +29,6 @@ export default function EditIntermederiesForm({ amparosById }) {
                     id="name"
                     name="name"
                     placeholder="Ingrese su nombre"
-                    defaultValue={amparosById.nombre}
                     className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-1 placeholder:text-gray-500"
                     aria-describedby="name-error"
                 />
@@ -51,12 +48,12 @@ export default function EditIntermederiesForm({ amparosById }) {
             </div>
             <div className="mt-6 flex justify-end gap-4">
             <Link
-                to="/dashboard/amparos"
+                to="/dashboard/ramos"
                 className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
             >
                 Cancelar
             </Link>
-            <Button type="submit">Actualizar Amparos</Button>
+            <Button type="submit">Crear Ramos</Button>
             </div>
     </form>
   );

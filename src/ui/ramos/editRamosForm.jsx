@@ -3,23 +3,20 @@
 import { CiUser } from "react-icons/ci";
 import { Link } from "react-router";
 import { Button } from "../button";
-import {  updateAmparos, updateIntermederies } from "../../lib/actions";
+import {   updateRamos } from "../../lib/actions";
 import { useActionState } from "react";
 import { Toaster } from "sonner";
 import { useSelector } from "react-redux";
 
-export default function EditIntermederiesForm({ amparosById }) {
+export default function EditRamosForm({ ramosById }) {
 
-    
-  const { accessToken} = useSelector(
-    (state) => state.Refrestoken
-  );  
-    const initialState ={message:"",errors:{}};
-    const updateWithId = updateAmparos.bind(null,amparosById.id,accessToken);
-    const [message, formAction, isPending] = useActionState(updateWithId,initialState);
+    const { accessToken } = useSelector((state) => state.Refrestoken);
+    const initialState = { message: "", errors: {} };
+    const updateWithId = updateRamos.bind(null, ramosById.id, accessToken);
+    const [message, formAction, isPending] = useActionState(updateWithId, initialState);
 
-    return (
-            <form action={formAction}  >
+
+    return ( <form action={formAction}  >
                 <Toaster richColors position="top-center" />
             <div className="rounded-md bg-gray-50 p-4 md:p-6">
             <div className="mb-4">
@@ -31,7 +28,7 @@ export default function EditIntermederiesForm({ amparosById }) {
                     id="name"
                     name="name"
                     placeholder="Ingrese su nombre"
-                    defaultValue={amparosById.nombre}
+                    defaultValue={ramosById.nombre}
                     className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-1 placeholder:text-gray-500"
                     aria-describedby="name-error"
                 />
@@ -46,8 +43,7 @@ export default function EditIntermederiesForm({ amparosById }) {
                         ))}
                     </div>
             </div>
-            
-            
+        
             </div>
             <div className="mt-6 flex justify-end gap-4">
             <Link
@@ -56,8 +52,9 @@ export default function EditIntermederiesForm({ amparosById }) {
             >
                 Cancelar
             </Link>
-            <Button type="submit">Actualizar Amparos</Button>
+            <Button type="submit">Actualizar ramos</Button>
             </div>
     </form>
+           
   );
 }

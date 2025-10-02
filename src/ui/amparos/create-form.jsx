@@ -54,7 +54,7 @@ export default function Form() {
             >
                 Cancelar
             </Link>
-            <Button type="submit">Actualizar Amparos</Button>
+            <Button type="submit">Crear Amparos</Button>
             </div>
     </form>
   );

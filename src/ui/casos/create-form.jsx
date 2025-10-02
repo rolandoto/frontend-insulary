@@ -17,13 +17,13 @@ import { MdOutlineDateRange } from "react-icons/md";
 export default function Form( ) {
  
     const { accessToken} = useSelector(
-    (state) => state.Refrestoken
-    );  
+    (state) => state.Refrestoken);
+
     const initialState ={message:"",errors:{}};
     const createWithToken = createCases.bind(null,accessToken);
     const {ClientFilter} = useSelector((state) => state.clients);
     const {loading,intermediariesFilter}= useSelector((state) => state.intermederies)
-    const {Ramos,amparosFilter}= useSelector((state) => state.ramos)
+    const {ramos,amparosFilter}= useSelector((state) => state.ramos)
     const {branchesFilter}= useSelector((state) => state.branches)
     const {PostClient} =   ActionsClient()
     const  {PostIntermederies} =ActionsIntermederies()
@@ -388,7 +388,7 @@ export default function Form( ) {
           <option value="" disabled>
             Seleccione el Ramo
           </option>
-          {Ramos.map((intermediary) => (
+          {ramos.map((intermediary) => (
             <option key={intermediary.id} value={intermediary.id}>
               {intermediary.nombre}
             </option>

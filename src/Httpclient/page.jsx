@@ -694,6 +694,7 @@ const GetRefrestToken = async () => {
   };
 
 
+//RAMOS
    const fetchRamos = async ({query,token}) => {
       try {
           const resp = await fetch(`${config.serverRoute}/api/ramos/PostRamos`, {
@@ -738,26 +739,26 @@ const GetRefrestToken = async () => {
   };
 
 
-      const fetchCasosDocument = async ({id,token}) => {
-          try {
-              const resp = await fetch(`${config.serverRoute}/api/client/PostCasesDocumentByID`, {
-                method: "POST",
-                body: JSON.stringify({id}),
-                headers: {
-                    'Content-type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-              });
-              if (!resp.ok) {
-                throw new Error('Response is not ok');
-              }
-              const data = await resp.json();
-
-              return data.estadosCasos
-            } catch (error) {
-              throw error; 
+    const fetchCasosDocument = async ({id,token}) => {
+        try {
+            const resp = await fetch(`${config.serverRoute}/api/client/PostCasesDocumentByID`, {
+              method: "POST",
+              body: JSON.stringify({id}),
+              headers: {
+                  'Content-type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+              },
+            });
+            if (!resp.ok) {
+              throw new Error('Response is not ok');
             }
-      };
+            const data = await resp.json();
+
+            return data.estadosCasos
+          } catch (error) {
+            throw error; 
+          }
+    };
 
 
     const fetchDocument = async ({id,token}) => {
@@ -781,6 +782,99 @@ const GetRefrestToken = async () => {
             }
       };
 
+
+
+        
+     const PostRamos= async ({query,currentPage,token}) => {
+        try {
+          const resp = await fetch(`${config.serverRoute}/api/ramos/PostRamosArray`, {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({query,currentPage})
+          });
+            if (!resp.ok) {
+              
+              throw new Error('Response is not ok');
+            }
+            const data = await resp.json();
+
+            return data.ramos
+          } catch (error) {
+            throw error; // You can re-throw the error or handle it differently based on your needs
+          }
+      }
+
+
+      const PostRamosFilter= async ({query,currentPage,token}) => {
+        try {
+          const resp = await fetch(`${config.serverRoute}/api/ramos/PostRamosArray`, {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({query,currentPage})
+          });
+            if (!resp.ok) {
+              
+              throw new Error('Response is not ok');
+            }
+            const data = await resp.json();
+
+            return data.ramosFilter
+          } catch (error) {
+            throw error; // You can re-throw the error or handle it differently based on your needs
+          }
+      }
+
+
+
+      const PostRamosTotalPage = async ({ query, token }) => {
+          try {
+            const resp = await fetch(`${config.serverRoute}/api/ramos/PostRamosTotalPages`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+              },
+              body: JSON.stringify({ query }),
+            });
+
+            if (!resp.ok) {
+              throw new Error("Response is not ok");
+            }
+
+            const data = await resp.json();
+            return data.totalPages;
+          } catch (error) {
+            throw error; // manejar o relanzar el error según tu necesidad
+          }
+    }
+      
+      const fetchRamosByID = async ({ id, token }) => {
+        try {
+          const resp = await fetch(`${config.serverRoute}/api/ramos/PostRamosByID`, {
+            method: "POST",
+            body: JSON.stringify({ id }),
+              headers: {
+                "Content-type": "application/json",
+                "Authorization": `Bearer ${token}`,
+              },
+          });
+
+          if (!resp.ok) {
+            throw new Error("Response is not ok");
+          }
+
+          const data = await resp.json();
+          return data.ramos;
+        } catch (error) {
+          throw error; // puedes manejarlo o relanzarlo según la necesidad
+        }
+      };
 
   export default {
     fetchClients,
@@ -818,5 +912,9 @@ const GetRefrestToken = async () => {
     PostAmparos,
     PostAmparosTotalPage,
     PostAmparosFilter,
-    fetchAmparosByID
+    fetchAmparosByID,
+    PostRamos,
+    PostRamosTotalPage,
+    PostRamosFilter,
+    fetchRamosByID
   }

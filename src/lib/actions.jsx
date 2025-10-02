@@ -1041,5 +1041,113 @@ export async function createAmparos(token,prevState, formData) {
   
 }
 
-  
 
+
+ const FormSchemaRamos = z.object({
+  name: z.string().nonempty('Por favor, ingresa un nombre completo.'),
+});
+
+
+export async function updateRamos(id,token,prevState, formData) {
+
+    const validatedFields = FormSchemaRamos.safeParse({
+          name: formData.get("name")
+    });
+  
+    if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+        message: 'Hay campos inválidos.',
+      };
+    }
+
+    const {name}  = validatedFields.data
+
+    try {
+        
+      const res = await fetch(`${config.serverRoute}/api/ramos/PostUpdateRamos`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+          body: JSON.stringify({ name, id }),
+        });
+          if (!res.ok) {
+            const response = await res.json();
+            toast.error(response.msg || 'Error al registrar cliente.');
+            return {
+                success: false,
+                message: response.msg || 'Error al registrar cliente.',
+                errors: response.errors ,
+              };
+          }
+              const responseData = await res.json();
+              
+              toast.success("guardado correctamente")
+              return {
+                message: " creado exitosamente",
+                data: responseData,
+      };
+    } catch (err) {
+
+      toast.error("Algo paso en el sistema")
+      return {
+          message:"error en el sistem"
+    }
+  }
+  
+}
+
+
+export async function createRamos(token,prevState, formData) {
+
+    const validatedFields = FormSchemaRamos.safeParse({
+          name: formData.get("name")
+    });
+  
+    if (!validatedFields.success) {
+      return {
+        errors: validatedFields.error.flatten().fieldErrors,
+        message: 'Hay campos inválidos.',
+      };
+    }
+
+    const {name}  = validatedFields.data
+    
+    try {
+
+        const res = await fetch(`${config.serverRoute}/api/ramos/PostCreateRamos`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+          body: JSON.stringify({ name}),
+        });
+          if (!res.ok) {
+            const response = await res.json();
+            toast.error(response.msg || 'Error al registrar cliente.');
+            return {
+                success: false,
+                message: response.msg || 'Error al registrar cliente.',
+                errors: response.errors ,
+              };
+          }
+              const responseData = await res.json();
+              
+              toast.success("guardado correctamente")
+              return {
+                message: " creado exitosamente",
+                data: responseData,
+      };
+
+    } catch (err) {
+      console.log({err})
+      toast.error("Algo paso en el sistema")
+      return {
+          message:"error en el sistem"
+    }
+  }
+  
+}

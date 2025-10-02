@@ -103,6 +103,18 @@ export function CreateInvoice() {
     );
   }
 
+  
+   export function CreateRamos() {
+    return (
+      <Link
+        to="/dashboard/ramos/create"
+        className="flex h-10 items-center rounded-lg bg-[#df0209] px-4 text-sm font-medium text-white transition-colors hover:bg-[#df0209] focus-visible:bg-[#df0209] focus-visible:bg-[#df0209] focus-visible:outline-offset-2 focus-visible:">
+        <span className="hidden md:block">Crear Ramos</span>{' '}
+        <FiPlus className="h-5 md:ml-4" />
+      </Link>
+    );
+  }
+
 
 
   export function CreateCasos() {
@@ -198,6 +210,17 @@ export function UpdateCustomers({ id }) {
     );
   }
 
+
+   export function UpdateRamos({ id }) {
+    return (
+      <Link
+        to={`/dashboard/ramos/${id}/edit`}
+        className="rounded-md border border-gray-200 p-2 hover:bg-gray-100"
+      >
+        <HiOutlinePencil fontSize={25} className="w-5" />
+      </Link>
+    );
+  }
 
   export function UpdateUsers({ id }) {
     return (

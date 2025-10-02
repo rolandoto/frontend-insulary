@@ -1,13 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  Ramos: [],
+  ramos: [],
   loading: false,
   error: null,
+
+  totalPages: 0,
+  loadingPages: false,
+  errorPages: null,
+
+  postRamosData: [],
+  postRamosLoading: false,
+  postRamosError: null,
 
   amparosFilter: [],
   loadingAmparos: false,
   errorAmparos: null,
+
+  ramosFilter: [],
+  ramosFilterLoading: false,
+  ramosFilterError: null,
+
+
+  ramosById: null,
+  isLoadingRamos: false,
+  ramosError: null,
+
 };
 
 export const ramosSlice = createSlice({
@@ -21,12 +39,13 @@ export const ramosSlice = createSlice({
     },
     fetchRamosSuccess: (state, action) => {
       state.loading = false;
-      state.Ramos = action.payload;
+      state.ramos = action.payload;
     },
     fetchRamosFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
+
     // --- Amparos ---
     fetchAmparosStart: state => {
       state.loadingAmparos = true;
@@ -40,6 +59,53 @@ export const ramosSlice = createSlice({
       state.loadingAmparos = false;
       state.errorAmparos = action.payload;
     },
+
+    // --- Post Ramos ---
+    postRamosStart: (state) => {
+      state.postRamosLoading = true;
+      state.postRamosError = null;
+    },
+    postRamosSuccess: (state, action) => {
+      state.postRamosLoading = false;
+      state.postRamosData = action.payload;
+    },
+    postRamosFailure: (state, action) => {
+      state.postRamosLoading = false;
+      state.postRamosError = action.payload;
+    },
+
+    setRamosFilter: (state, action) => {
+      state.ramosFilter = action.payload;
+    },
+
+    // --- Paginación ---
+    fetchPagesStart: (state) => {
+      state.loadingPages = true;
+      state.errorPages = null;
+    },
+    fetchPagesSuccess: (state, action) => {
+      state.loadingPages = false;
+      state.totalPages = action.payload;
+    },
+    fetchPagesFailure: (state, action) => {
+      state.loadingPages = false;
+      state.errorPages = action.payload;
+    },
+
+
+    fetchRamosByIdStart: (state) => {
+      state.isLoadingRamos = true;
+      state.ramosError = null;
+    },
+    fetchRamosByIdSuccess: (state, action) => {
+      state.isLoadingRamos = false;
+      state.ramosById = action.payload;
+    },
+    fetchRamosByIdFailure: (state, action) => {
+      state.isLoadingRamos = false;
+      state.ramosError = action.payload;
+    },
+
   },
 });
 
@@ -50,6 +116,16 @@ export const {
   fetchAmparosStart,
   fetchAmparosSuccess,
   fetchAmparosFailure,
+  postRamosStart,
+  postRamosSuccess,
+  postRamosFailure,
+  fetchPagesStart,
+  fetchPagesSuccess,
+  fetchPagesFailure,
+  setRamosFilter,
+  fetchRamosByIdStart,
+  fetchRamosByIdSuccess,
+  fetchRamosByIdFailure
 } = ramosSlice.actions;
 
 export default ramosSlice.reducer;
