@@ -16,7 +16,7 @@ export default function EditCasesForm({ cases }) {
 
     const {branchesFilter}= useSelector((state) => state.branches)
     const {ClientFilter,casosEstados} = useSelector((state) => state.clients);
-    const {Ramos,amparosFilter}= useSelector((state) => state.ramos)
+    const {ramos,amparosFilter}= useSelector((state) => state.ramos)
     const {loading,intermediariesFilter}= useSelector((state) => state.intermederies)
     const initialState ={message:"",errors:{}};
     const updateInvoiceWithId = updateCasos.bind(null,cases.id,accessToken);
@@ -25,8 +25,6 @@ export default function EditCasesForm({ cases }) {
     const fechaSiniestro = new Date(cases.fecha_siniestro);
     const fechaaviso = new Date(cases.fecha_aviso);
     const fechaAsignacion = new Date(cases.fecha_asignacion);
-
-    
 
   return (
     <form action={formAction}>
@@ -406,11 +404,12 @@ export default function EditCasesForm({ cases }) {
               name="ramo_asegurado"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               aria-describedby="Ramo-error"
+              defaultValue={cases.idramo}
             >
               <option value="" disabled>
                 Seleccione el Ramo
               </option>
-              {Ramos.map((intermediary) => (
+              {ramos.map((intermediary) => (
                 <option key={intermediary.id} value={intermediary.id}>
                   {intermediary.nombre}
                 </option>
@@ -437,6 +436,7 @@ export default function EditCasesForm({ cases }) {
               name="amparos_asegurado"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               aria-describedby="amparos-error"
+              defaultValue={cases.idamparo}
             >
               <option value="" disabled>
                 Seleccione el Ramo
