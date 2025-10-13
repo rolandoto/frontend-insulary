@@ -862,20 +862,38 @@ const FormSchemaDocument = z.object({
   id: z.string(), // Suponemos que el ID es opcional o viene precargado
   name: z.string().nonempty('Por favor, ingresa un nombre completo.'),
   description: z.string().nonempty('Por favor, ingresa un número de codigo.'),
-  file: z
-      .any()
-      .refine((file) => file instanceof File, {
-        message: "Debe adjuntar un archivo",
-      })
-      .refine((file) => file.size > 0, {
-        message: "Debe adjuntar un archivo válido",
-      }),
+ file: z
+    .any()
+    .refine((file) => {
+      // ✅ Si es FileList, extraer el primer archivo
+      if (file instanceof FileList) file = file[0];
+      if (Array.isArray(file)) file = file[0];
+      return file instanceof File;
+    }, {
+      message: "Debe adjuntar un archivo",
+    })
+    .refine((file) => {
+      if (file instanceof FileList) file = file[0];
+      if (Array.isArray(file)) file = file[0];
+      return file && file.size > 0;
+    }, {
+      message: "Debe adjuntar un archivo válido",
+    })
+    .refine((file) => {
+      if (file instanceof FileList) file = file[0];
+      if (Array.isArray(file)) file = file[0];
+      return file && file.size <= 100 * 1024 * 1024;
+    }, {
+      message: "El archivo no debe superar los 100 MB",
+    }),
 });
 
 const documentUload= FormSchemaDocument.omit({ id: true, date: true });
 
 
    export async function uploadCasos(id,token,prevState, formData) {
+
+    console.log("formData",formData.get("file"))
 
       const validatedFields = documentUload.safeParse({
         name: formData.get("name"),
@@ -922,7 +940,7 @@ const documentUload= FormSchemaDocument.omit({ id: true, date: true });
       const responseData = await res.json();
 
       toast.success("Guardado correctamente");
-
+      window.location.reload()
       return "correctamente"
     } catch (err) {
 

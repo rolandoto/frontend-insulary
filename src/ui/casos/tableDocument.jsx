@@ -24,9 +24,7 @@ export default function TableDocument({casosDocument}) {
                 }
                 if(errorDocument){
                     return <Error />
-                }
-                
-             
+                }  
         }
 
 
