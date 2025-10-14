@@ -49,18 +49,19 @@ export const amparosSlice = createSlice({
       state.errorPages = action.payload;
     },
 
-    fetchRamosByIdStart: (state) => {
-      state.isLoadingRamos = true;
-      state.ramosError = null;
+    fetchAmparosByIdStart: (state) => {
+      state.isLoadingAmparos = true;
+      state.amparosError = null;
     },
-    fetchRamosByIdSuccess: (state, action) => {
-      state.isLoadingRamos = false;
-      state.ramosById = action.payload;
+    fetchAmparosByIdSuccess: (state, action) => {
+      state.isLoadingAmparos = false;
+      state.amparosById = action.payload;
     },
-    fetchRamosByIdFailure: (state, action) => {
-      state.isLoadingRamos = false;
-      state.ramosError = action.payload;
-    },  },
+    fetchAmparosByIdFailure: (state, action) => {
+      state.isLoadingAmparos = false;
+      state.amparosError = action.payload;
+    },
+  },
 });
 
 // Exporta las acciones

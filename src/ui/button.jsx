@@ -17,8 +17,6 @@ export function Button({ children, className,...rest }) {
   );
 }
 
-
-
 export function DeleteCasos({ id }) {
 const { accessToken} = useSelector((state) => state.Refrestoken);  
 const deleteCasosWithId = deleteCasos.bind(null,id,accessToken);
@@ -34,8 +32,6 @@ const deleteCasosWithId = deleteCasos.bind(null,id,accessToken);
     </>
   );
 }
-
-
 
 export function UploadCasos({ id }) {
   const { accessToken } = useSelector((state) => state.Refrestoken);
@@ -141,7 +137,7 @@ export function UploadCasos({ id }) {
               : "border-gray-300 bg-gray-100 hover:bg-gray-50"
           }`}
           onClick={() => document.getElementById("file").click()}
-        >
+>
           <input
             type="file"
             id="file"

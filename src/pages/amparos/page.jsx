@@ -15,7 +15,6 @@ const Amparos =() =>{
     const [searchParams] = useSearchParams();
     const currentPage = Number(searchParams.get("page")) || 1;
     const query = searchParams.get("q") || "";
-
     const {error,totalPages,amparosFilter}= useSelector((state) => state.amparos)
 
     const fillCotent =() =>{ 
@@ -40,7 +39,6 @@ const Amparos =() =>{
                 </div>
               </div>
       }
-
     return <Layout>
              {fillCotent()}
             </Layout>

@@ -37,11 +37,10 @@ const ActionsAmparos =() =>{
             }
         }
 
-
-
         const PostAmparosById = async ({ id, token }) => {
             dispatch(fetchAmparosByIdStart());
             try {
+
                 const response = await Httpclient.fetchAmparosByID({ id, token });
 
                 if (response) {

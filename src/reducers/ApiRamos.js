@@ -91,8 +91,6 @@ export const ramosSlice = createSlice({
       state.loadingPages = false;
       state.errorPages = action.payload;
     },
-
-
     fetchRamosByIdStart: (state) => {
       state.isLoadingRamos = true;
       state.ramosError = null;
