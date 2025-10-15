@@ -140,16 +140,18 @@ export async function updateCustomers(id,token,prevState, formData) {
   
   }
 
-  const FormSchemaUsers = z.object({
-    id: z.string(),
-    name: z.string().nonempty('Por favor, ingresa un nombre.'),
-    email: z
-      .string()
-      .nonempty('Por favor, ingresa un correo electrónico.')
-      .email('Correo inválido'),
-    usersId:  z.string({invalid_type_error: 'Por favor elegir tu rol',}),
-    password: z.string().nonempty('Por favor, ingresa tu contraseña.'),
-  });
+export const FormSchemaUsers = z.object({
+  id: z.string(),
+  name: z.string().nonempty("Por favor, ingresa un nombre."),
+  email: z
+    .string()
+    .nonempty("Por favor, ingresa un correo electrónico.")
+    .email("Correo inválido"),
+  usersId: z.string({
+    invalid_type_error: "Por favor elegir tu rol",
+  }),
+  password: z.string().nonempty("Por favor, ingresa tu contraseña."),
+});
   
   const CreatUsers = FormSchemaUsers.omit({ id: true});
 
@@ -172,7 +174,7 @@ export async function updateCustomers(id,token,prevState, formData) {
 
     const {name,usersId,email,password}  = validatedFields.data
   
-   
+    
     try {
       const res = await fetch(`${config.serverRoute}/api/admin/register`, {
         method: "POST",
@@ -213,7 +215,19 @@ export async function updateCustomers(id,token,prevState, formData) {
   
   }
 
-  const UpdatetUsers = FormSchemaUsers.omit({ id: true});
+
+  const FormSchemaUsersUpdate = z.object({
+    id: z.string(),
+    name: z.string().nonempty('Por favor, ingresa un nombre.'),
+    email: z
+      .string()
+      .nonempty('Por favor, ingresa un correo electrónico.')
+      .email('Correo inválido'),
+    usersId:  z.string({invalid_type_error: 'Por favor elegir tu rol',}),
+    password: z.string().optional('Por favor, ingresa tu contraseña.'),
+  });
+
+  const UpdatetUsers = FormSchemaUsersUpdate.omit({ id: true});
 
   export async function updateUsers(id,token,prevState, formData) {
 
@@ -231,7 +245,7 @@ export async function updateCustomers(id,token,prevState, formData) {
     }
     const {name,email,usersId,password}  = validatedFields.data
     try {
-      
+    
       const res = await fetch(`${config.serverRoute}/api/admin/changePassword`, {
         method: "POST",
         headers: {
@@ -245,6 +259,7 @@ export async function updateCustomers(id,token,prevState, formData) {
       const responseData = await res.json();
     
       if (!res.ok) {
+       
         toast.error(responseData.msg || 'Error al registrar cliente.');
         return {
           success: false,

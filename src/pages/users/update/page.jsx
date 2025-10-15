@@ -4,7 +4,6 @@ import { useParams } from "react-router"
 import Layout from "../../dashboard/layout"
 import { useDispatch, useSelector } from "react-redux"
 import ActionsUsers from "../../../Actions/ActionsUsers"
-import NotFound from "../../noFound/not-found"
 import { InvoicesTableSkeleton } from "../../../ui/skeleton"
 import Error from "../../../ui/Error"
 
