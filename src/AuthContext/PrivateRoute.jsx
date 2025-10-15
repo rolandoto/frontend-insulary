@@ -5,7 +5,7 @@ export default function PrivateRoute({ children }) {
   const { accessToken, loadingRegrestoken, errorRefrestoken } = useSelector(
     (state) => state.Refrestoken
   );
-  
+
   if (loadingRegrestoken) {
     return <div>Cargando sesión...</div>; // Mostramos algo mientras se intenta el refresh
   }

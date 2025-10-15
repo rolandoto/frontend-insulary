@@ -1184,3 +1184,46 @@ export async function createRamos(token,prevState, formData) {
   }
   
 }
+
+export async function logoutUser(token) {
+  try {
+
+   const res = await fetch(`${config.serverRoute}/api/admin/logout`, {
+           method: "POST",
+           headers: {
+             'Content-Type': 'application/json',
+             "Authorization": `Bearer ${token}`,
+           },
+           credentials: "include"
+         });
+
+    const responseData = await res.json();
+
+    if (!res.ok) {
+      toast.error(responseData.msg || "Error al cerrar sesión.");
+      return {
+        success: false,
+        message: responseData.msg || "Error al cerrar sesión.",
+      };
+    }
+
+    toast.success("Sesión cerrada correctamente ✅");
+
+    // Opcional: redirigir al login
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1000);
+
+    return {
+      success: true,
+      message: "Sesión cerrada correctamente",
+    };
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error);
+    toast.error("Algo pasó en el sistema");
+    return {
+      success: false,
+      message: "Error en el sistema",
+    };
+  }
+}

@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { deleteCasos, uploadCasos } from '../lib/actions';
+import { deleteCasos, logoutUser, uploadCasos } from '../lib/actions';
 import { useSelector } from 'react-redux';
 import { useActionState, useRef, useState } from 'react';
 import { Toaster } from 'sonner';
+import { CiPower } from "react-icons/ci";
 
 export function Button({ children, className,...rest }) {
   return (
@@ -18,8 +19,8 @@ export function Button({ children, className,...rest }) {
 }
 
 export function DeleteCasos({ id }) {
-const { accessToken} = useSelector((state) => state.Refrestoken);  
-const deleteCasosWithId = deleteCasos.bind(null,id,accessToken);
+  const { accessToken} = useSelector((state) => state.Refrestoken);  
+  const deleteCasosWithId = deleteCasos.bind(null,id,accessToken);
 
   return (
     <>
@@ -29,6 +30,23 @@ const deleteCasosWithId = deleteCasos.bind(null,id,accessToken);
           <RiDeleteBin5Line  fontSize={25} className="w-5" />
         </button>
       </form>
+    </>
+  );
+}
+
+export function Logout() {
+  const { accessToken} = useSelector((state) => state.Refrestoken);  
+  const logoutUserWithId = logoutUser.bind(null,accessToken);
+ 
+
+  return (
+    <>
+      <form action={logoutUserWithId} >
+          <button className="flex h-[48px] Lusitana text-black w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
+            <CiPower fontSize={35} className="w-6" />
+            <div className=" cursor-pointer hidden md:block">Cerrar sesión</div>
+          </button>
+        </form>
     </>
   );
 }

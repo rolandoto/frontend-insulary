@@ -10,6 +10,8 @@ import { CiUser } from "react-icons/ci";
 
 const useFormValues = () => {
 
+ 
+
   const [formValues, setFormValues] = useState({
     email: '',
     password: ''
@@ -29,6 +31,7 @@ export default function LoginPage() {
   const validate = useValidation()
   const [formErrors, setFormErrors] = useState({});
   
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const errors = validate(formValues);
@@ -37,7 +40,6 @@ export default function LoginPage() {
       login({email:formValues.email,password:formValues.password})
     }
   };
-
 
   return (
     <main className="flex items-center justify-center md:h-screen">
