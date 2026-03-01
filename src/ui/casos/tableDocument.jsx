@@ -156,7 +156,7 @@ export default function TableDocument({casosDocument}) {
                       {/* Ver documento */}
                       <button
                         onClick={() =>
-                          window.open(`${config.serverRoute}/uploads/${doc.archivo}`, "_blank")
+                          window.open(`${config.amazonS3}/${doc.archivo}`, "_blank")
                         }
                         className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-xl flex items-center gap-2 text-xs shadow-sm transition"
                       >
