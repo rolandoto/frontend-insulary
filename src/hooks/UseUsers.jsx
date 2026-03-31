@@ -14,7 +14,7 @@ const UseUsers =() =>{
     
             setJwt(true);
             setState({ loading: false, error: false }); // ✅ loading en false
-            window.location.href="/ConfirmeCode"
+            window.location.href="/insula/ConfirmeCode"
           })
           .catch(() => {
             setState({ loading: false, error: true });

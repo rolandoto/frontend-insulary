@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
-   "homepage": "/insula",
+
   "dependencies": {
     "@openai/agents": "^0.0.12",
     "@reduxjs/toolkit": "^2.8.2",
