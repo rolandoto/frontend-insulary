@@ -41,33 +41,33 @@ function App() {
       <AppWrapper>
           <BrowserRouter>
               <Routes>
-                <Route  path='/' element={ < PublicRoute><LoginPage /></PublicRoute>  } />
-                <Route  path='/ConfirmeCode' element={ < PublicRoute><ConfirmCodePage /></PublicRoute>  } />
-                <Route path='/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute> } />
-                <Route path='/dashboard/customers' element={<PrivateRoute><Customers /></PrivateRoute> } />
-                <Route path='dashboard/customers/create' element={ <PrivateRoute><CreateForm /></PrivateRoute> } />
-                <Route path='/dashboard/customers/:id/edit' element={ <PrivateRoute><UpadateCustomers /></PrivateRoute>} />
-                <Route path='/dashboard/invoices' element={ <PrivateRoute><Invoince /></PrivateRoute>} />
-                <Route path='/dashboard/casos' element={<PrivateRoute><Casos /></PrivateRoute>} />
-                <Route path='/dashboard/casos/create' element={<PrivateRoute><CreateCasesForm /></PrivateRoute>} />
-                <Route path='/dashboard/casos/:id/edit' element={<PrivateRoute><UpadateCases /></PrivateRoute>} />
-                <Route path='/dashboard/casos/:id/Document' element={<PrivateRoute><DocumentCases /></PrivateRoute>} />
-                <Route path='/dashboard/users' element={<PrivateRoute><Users /></PrivateRoute>} />
-                <Route path='/dashboard/users/create' element={ <PrivateRoute><CreateUsersForm /></PrivateRoute> } />
-                <Route path='/dashboard/users/:id/edit' element={ <PrivateRoute><UpadateUsers /></PrivateRoute>} />
-                <Route path='/dashboard/intermederies' element={ <PrivateRoute><Intermederies/></PrivateRoute>} />
-                <Route path='/dashboard/intermederies/create' element={ <PrivateRoute><CreateIntermederiesForm/></PrivateRoute>} />
-                <Route path='/dashboard/intermederies/:id/edit' element={ <PrivateRoute><UpadateIntermederies/></PrivateRoute>} />
-                <Route path='/dashboard/branches' element={ <PrivateRoute><Branches/></PrivateRoute>} />
-                <Route path='/dashboard/branches/create' element={ <PrivateRoute><CreateBranchesForm/></PrivateRoute>} />
-                <Route path='/dashboard/branches/:id/edit' element={ <PrivateRoute><UpadateBranches/></PrivateRoute>} />
-                <Route path='/dashboard/amparos' element={ <PrivateRoute><Amparos/></PrivateRoute>} />
-                <Route path='/dashboard/amparos/:id/edit' element={ <PrivateRoute><UpadateAmparos/></PrivateRoute>} />
-                <Route path='/dashboard/amparos/create' element={ <PrivateRoute><CreateAmparosForm/></PrivateRoute>} />
-                <Route path='/dashboard/ramos' element={ <PrivateRoute><Ramos/></PrivateRoute>} />
-                <Route path='/dashboard/ramos/:id/edit' element={ <PrivateRoute><UpadateRamos/></PrivateRoute>} />
-                <Route path='/dashboard/ramos/create' element={ <PrivateRoute><CreateRamosForm  Form/></PrivateRoute>} />
-                <Route path='/text' element={ <Text/>} />
+                <Route  path='/insula' element={ < PublicRoute><LoginPage /></PublicRoute>  } />
+                <Route  path='/insula/ConfirmCode' element={ < PublicRoute><ConfirmCodePage /></PublicRoute>  } />
+                <Route path='insula/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute> } />
+                <Route path='insula/dashboard/customers' element={<PrivateRoute><Customers /></PrivateRoute> } />
+                <Route path='insula/dashboard/customers/create' element={ <PrivateRoute><CreateForm /></PrivateRoute> } />
+                <Route path='insula/dashboard/customers/:id/edit' element={ <PrivateRoute><UpadateCustomers /></PrivateRoute>} />
+                <Route path='insula/dashboard/invoices' element={ <PrivateRoute><Invoince /></PrivateRoute>} />
+                <Route path='insula/dashboard/casos' element={<PrivateRoute><Casos /></PrivateRoute>} />
+                <Route path='insula/dashboard/casos/create' element={<PrivateRoute><CreateCasesForm /></PrivateRoute>} />
+                <Route path='insula/dashboard/casos/:id/edit' element={<PrivateRoute><UpadateCases /></PrivateRoute>} />
+                <Route path='insula/dashboard/casos/:id/Document' element={<PrivateRoute><DocumentCases /></PrivateRoute>} />
+                <Route path='insula/dashboard/users' element={<PrivateRoute><Users /></PrivateRoute>} />
+                <Route path='insula/dashboard/users/create' element={ <PrivateRoute><CreateUsersForm /></PrivateRoute> } />
+                <Route path='insula/dashboard/users/:id/edit' element={ <PrivateRoute><UpadateUsers /></PrivateRoute>} />
+                <Route path='insula/dashboard/intermederies' element={ <PrivateRoute><Intermederies/></PrivateRoute>} />
+                <Route path='insula/dashboard/intermederies/create' element={ <PrivateRoute><CreateIntermederiesForm/></PrivateRoute>} />
+                <Route path='insula/dashboard/intermederies/:id/edit' element={ <PrivateRoute><UpadateIntermederies/></PrivateRoute>} />
+                <Route path='insula/dashboard/branches' element={ <PrivateRoute><Branches/></PrivateRoute>} />
+                <Route path='insula/dashboard/branches/create' element={ <PrivateRoute><CreateBranchesForm/></PrivateRoute>} />
+                <Route path='insula/dashboard/branches/:id/edit' element={ <PrivateRoute><UpadateBranches/></PrivateRoute>} />
+                <Route path='insula/dashboard/amparos' element={ <PrivateRoute><Amparos/></PrivateRoute>} />
+                <Route path='insula/dashboard/amparos/:id/edit' element={ <PrivateRoute><UpadateAmparos/></PrivateRoute>} />
+                <Route path='insula/dashboard/amparos/create' element={ <PrivateRoute><CreateAmparosForm/></PrivateRoute>} />
+                <Route path='insula/dashboard/ramos' element={ <PrivateRoute><Ramos/></PrivateRoute>} />
+                <Route path='insula/dashboard/ramos/:id/edit' element={ <PrivateRoute><UpadateRamos/></PrivateRoute>} />
+                <Route path='insula/dashboard/ramos/create' element={ <PrivateRoute><CreateRamosForm  Form/></PrivateRoute>} />
+                <Route path='insula/text' element={ <Text/>} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
           </BrowserRouter>
