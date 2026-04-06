@@ -8,11 +8,7 @@ import { useSelector } from "react-redux";
 import Pagination from "../../ui/customers/pagination";
 import Error from "../../ui/Error";
 
-const LazyTable = React.lazy(() =>
-    new Promise((resolve) => {
-      setTimeout(() => resolve(import("../../ui/customers/table")), 500);
-    })
-  );
+const LazyTable = React.lazy(() => import("../../ui/customers/table"));
 
 function Customers() {
   const [searchParams] = useSearchParams();
