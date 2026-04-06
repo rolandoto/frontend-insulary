@@ -21,11 +21,7 @@ const UpadateBranches =() =>{
     const {branchById,branchError } = useSelector((state) => state.branches);
     const {loading,error} = useSelector((state) => state.clients);
 
-     const LazyTable = React.lazy(() =>
-        new Promise((resolve) => {
-            setTimeout(() => resolve(import("../../../ui/Branches/edit-form")), 500);
-        })
-    );
+     const LazyTable = React.lazy(() => import("../../../ui/Branches/edit-form"));
 
     const fillContent =() =>{
     if(loading){

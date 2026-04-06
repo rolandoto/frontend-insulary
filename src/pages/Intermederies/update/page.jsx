@@ -20,11 +20,7 @@ const UpadateIntermederies =() =>{
             PostIntermederiesById({id,token:accessToken}); // asegúrate de que esto sea un thunk
       }, [dispatch]);
 
-    const LazyTable = React.lazy(() =>
-        new Promise((resolve) => {
-        setTimeout(() => resolve(import("../../../ui/intermederies/edit-form")), 500);
-        })
-    );
+    const LazyTable = React.lazy(() => import("../../../ui/intermederies/edit-form"));
 
    const fillContent =() =>{
     if(isLoadingIntermederies){

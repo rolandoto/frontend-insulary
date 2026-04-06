@@ -28,13 +28,13 @@ export default  function Table({query,currentPage}) {
   return (
   <div className="mt-6 flow-root">
     <div className="mt-6 flow-root">
-        <div className="inline-block min-w-full align-middle">
-          <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+        <div className="block w-full align-middle">
+          <div className="modern-table-shell p-2 md:pt-0">
             <div className="md:hidden">
-              {intermediaries?.map((client) => (
+              {intermediaries?.length ? intermediaries?.map((client) => (
                 <div
                   key={client.id}
-                  className="mb-2 w-full rounded-md bg-white p-4">
+                  className="modern-mobile-card mb-3 w-full p-4">
                   <div className="flex items-center justify-between  border-gray-200  border-b pb-4">
                     <div>
                       <div className="mb-2 flex items-center">
@@ -60,10 +60,13 @@ export default  function Table({query,currentPage}) {
                     </div>
                   </div>
                 </div>
-              ))}
+              )) : (
+                <div className="modern-empty-state rounded-xl bg-white">No hay intermediarios para mostrar.</div>
+              )}
             </div>
-            <table className="hidden min-w-full text-gray-900 md:table">
-              <thead className="rounded-lg text-left text-sm font-normal">
+            <div className="modern-table-wrapper hidden md:block">
+            <table className="modern-table min-w-[1120px] table-auto text-sm text-gray-700">
+              <thead className="bg-gray-50 text-left text-xs font-semibold text-gray-600">
                 <tr>
                   <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
                     Nombre
@@ -88,11 +91,11 @@ export default  function Table({query,currentPage}) {
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white">
-                {intermediaries?.map((client) => (
+              <tbody className="divide-y divide-slate-100 bg-white">
+                {intermediaries?.length ? intermediaries?.map((client) => (
                   <tr
                   key={client.id}
-                    className="w-full border-b border-gray-200 py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
+                    className="w-full align-middle text-sm">
                     <td className="whitespace-nowrap py-3 pl-6 pr-3">
                       <div className="flex items-center gap-3">
                       <img
@@ -103,19 +106,19 @@ export default  function Table({query,currentPage}) {
                        {client.nombre}
                       </div>
                     </td>
-                    <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
+                    <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[260px] xl:max-w-none px-3 py-3">
                     {client.nit}
                     </td>
-                    <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
+                    <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[260px] xl:max-w-none px-3 py-3">
                     {client.direccion}
                     </td>
-                    <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
+                    <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[260px] xl:max-w-none px-3 py-3">
                     {client.email}
                     </td>
-                    <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
+                    <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[260px] xl:max-w-none px-3 py-3">
                     {client.telefono}
                     </td>
-                     <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
+                     <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[260px] xl:max-w-none px-3 py-3">
                     {client.tipo}
                     </td>
                     <td className="whitespace-nowrap py-3 pl-6 pr-3">
@@ -124,9 +127,16 @@ export default  function Table({query,currentPage}) {
                       </div>
                     </td>
                   </tr>
-                ))}
+                )) : (
+                  <tr>
+                    <td colSpan={7} className="modern-empty-state">
+                      No hay intermediarios para mostrar.
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
+          </div>
           </div>
         </div>
       </div>
