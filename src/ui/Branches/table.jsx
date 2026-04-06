@@ -29,7 +29,7 @@ export default  function Table({query,currentPage}) {
   return (
     <div className="mt-6 flow-root">
         <div className="mt-6 flow-root">
-            <div className="inline-block min-w-full align-middle">
+            <div className="block w-full align-middle">
               <div className="modern-table-shell p-2 md:pt-0">
                 <div className="md:hidden">
                   {branches?.length ? branches?.map((client) => (
@@ -66,7 +66,7 @@ export default  function Table({query,currentPage}) {
                   )}
                 </div>
                 <div className="modern-table-wrapper hidden md:block">
-            <table className="modern-table min-w-full table-auto text-sm text-gray-700">
+            <table className="modern-table min-w-[1060px] table-auto text-sm text-gray-700">
                   <thead className="bg-gray-50 text-left text-xs font-semibold text-gray-600">
                     <tr>
                       <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
@@ -105,16 +105,16 @@ export default  function Table({query,currentPage}) {
                            {client.codigo}
                           </div>
                         </td>
-                        <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
+                        <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[260px] xl:max-w-none px-3 py-3">
                         {client.nombre}
                         </td>
-                        <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
+                        <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[260px] xl:max-w-none px-3 py-3">
                         {client.nombre_cliente}
                         </td>
-                        <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
+                        <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[260px] xl:max-w-none px-3 py-3">
                         {client.telefono}
                         </td>
-                        <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] px-3 py-3">
+                        <td className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[260px] xl:max-w-none px-3 py-3">
                         {client.direccion}
                         </td>
                         <td className="whitespace-nowrap py-3 pl-6 pr-3">

@@ -26,7 +26,7 @@ export default  function Table({query,currentPage}) {
   return (
     <div className="mt-6 flow-root">
     <div className="mt-6 flow-root">
-      <div className="inline-block min-w-full align-middle">
+      <div className="block w-full align-middle">
         <div className="modern-table-shell p-2 md:pt-0">
           <div className="md:hidden">
             {users?.length ? users?.map((client) => (

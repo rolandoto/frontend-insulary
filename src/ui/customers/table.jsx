@@ -27,7 +27,7 @@ export default  function Table({query,currentPage}) {
   return (
     <div className="mt-6 flow-root">
         <div className="mt-6 flow-root">
-      <div className="inline-block min-w-full align-middle">
+      <div className="block w-full align-middle">
         <div className="modern-table-shell p-2 md:pt-0">
           <div className="md:hidden">
             {clients?.length ? clients?.map((client) => (
@@ -64,7 +64,7 @@ export default  function Table({query,currentPage}) {
             )}
           </div>
           <div className="modern-table-wrapper hidden md:block">
-            <table className="modern-table min-w-full table-auto text-sm text-gray-700">
+            <table className="modern-table min-w-[980px] table-auto text-sm text-gray-700">
             <thead className="bg-gray-50 text-left text-xs font-semibold text-gray-600">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
