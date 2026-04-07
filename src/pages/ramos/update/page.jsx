@@ -16,11 +16,7 @@ const UpadateRamos =() =>{
     const { PostRamosById } = ActionsRamos();
 
 
-    const LazyTable = React.lazy(() =>
-            new Promise((resolve) => {
-                setTimeout(() => resolve(import("../../../ui/ramos/editRamosForm")), 500);
-            })
-    );
+    const LazyTable = React.lazy(() => import("../../../ui/ramos/editRamosForm"));
 
     
        useEffect(() => {

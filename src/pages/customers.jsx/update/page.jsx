@@ -20,11 +20,7 @@ const UpadateCustomers =() =>{
       }, [dispatch]);
 
 
-    const LazyTable = React.lazy(() =>
-        new Promise((resolve) => {
-        setTimeout(() => resolve(import("../../../ui/customers/edit-form")), 500);
-        })
-    );
+    const LazyTable = React.lazy(() => import("../../../ui/customers/edit-form"));
 
    const fillContent =() =>{
     if(isLoadingClient){

@@ -30,11 +30,7 @@ const UpadateUsers =() =>{
   }, [dispatch]);
 
 
-  const LazyTable = React.lazy(() =>
-    new Promise((resolve) => {
-      setTimeout(() => resolve(import("../../../ui/users/edit-form")), 500);
-    })
-  );
+  const LazyTable = React.lazy(() => import("../../../ui/users/edit-form"));
 
    const fillContent =() =>{
     if(LoadingUser){

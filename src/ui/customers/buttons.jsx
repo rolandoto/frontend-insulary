@@ -123,7 +123,7 @@ export function CreateInvoice() {
         to="/dashboard/casos/create"
         className="flex h-10 items-center rounded-lg bg-[#df0209] px-4 text-sm font-medium text-white transition-colors hover:bg-[#df0209] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-[#df0209]"
       >
-        <span className="hidden md:block">Crear Casos</span>{' '}
+        <span className="hidden md:block">Nuevo caso</span>{' '}
         <FiPlus className="h-5 md:ml-4" />
       </Link>
     );

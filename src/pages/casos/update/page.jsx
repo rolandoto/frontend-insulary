@@ -23,11 +23,7 @@ export default function UpadateCases( ) {
     const {PostBranches} =   ActionsBranches()
 
 
-    const LazyTable = React.lazy(() =>
-        new Promise((resolve) => {
-          setTimeout(() => resolve(import("../../../ui/casos/edit-form")), 500);
-        })
-      );
+    const LazyTable = React.lazy(() => import("../../../ui/casos/edit-form"));
 
         useEffect(() => {
                 PostCasesById({id,token:accessToken}); // asegúrate de que esto sea un thunk
