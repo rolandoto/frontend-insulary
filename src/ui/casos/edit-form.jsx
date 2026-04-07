@@ -29,8 +29,21 @@ export default function EditCasesForm({ cases }) {
   return (
     <form action={formAction}>
         <Toaster richColors position="top-center" />
-        <div className="rounded-md bg-gray-50 p-4 md:p-6">
-        <div className="mb-4">
+        <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:p-6">
+        <div className="mb-6 rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <h2 className="text-lg font-semibold text-slate-800">Actualizar caso</h2>
+          <p className="mt-1 text-sm text-slate-500">
+            Revisa y ajusta los datos por bloques para validar la información sin perder contexto.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium">
+            <a href="#datos-caso" className="rounded-full bg-white px-3 py-1 text-slate-600 ring-1 ring-slate-200 hover:bg-slate-100">Datos del caso</a>
+            <a href="#asegurado" className="rounded-full bg-white px-3 py-1 text-slate-600 ring-1 ring-slate-200 hover:bg-slate-100">Asegurado</a>
+            <a href="#tomador" className="rounded-full bg-white px-3 py-1 text-slate-600 ring-1 ring-slate-200 hover:bg-slate-100">Tomador</a>
+            <a href="#detalle-final" className="rounded-full bg-white px-3 py-1 text-slate-600 ring-1 ring-slate-200 hover:bg-slate-100">Detalle final</a>
+          </div>
+        </div>
+        <div className="grid gap-4 lg:grid-cols-2">
+        <div id="datos-caso" className="mb-4">
           <label htmlFor="clientId" className="mb-2 block text-sm font-medium">
             Cliente / Aseguradora 
           </label>
@@ -210,7 +223,7 @@ export default function EditCasesForm({ cases }) {
           </div>
         </div>
     
-        <div className="relative flex items-center justify-center">
+        <div id="asegurado" className="relative flex items-center justify-center lg:col-span-2">
           <div className="flex-grow border-t border-black"></div>
             <span className="mx-4 bg-white px-3 text-sm font-medium text-black">ASEGURADO</span>
           <div className="flex-grow border-t border-black"></div>
@@ -460,7 +473,7 @@ export default function EditCasesForm({ cases }) {
         </div>
     
         
-        <div className="relative flex items-center justify-center">
+        <div id="tomador" className="relative flex items-center justify-center lg:col-span-2">
             <div className="flex-grow border-t border-black"></div>
               <span className="mx-4 bg-white px-3 text-sm font-medium text-black">TOMADOR</span>
             <div className="flex-grow border-t border-black"></div>
@@ -697,8 +710,9 @@ export default function EditCasesForm({ cases }) {
           </div>
         </div>
     
-     <div className="relative flex items-center justify-center">
+     <div id="detalle-final" className="relative flex items-center justify-center lg:col-span-2">
             <div className="flex-grow border-t border-black"></div>
+              <span className="mx-4 bg-white px-3 text-sm font-medium text-black">DETALLE FINAL</span>
             <div className="flex-grow border-t border-black"></div>
         </div>
     
@@ -1043,15 +1057,15 @@ export default function EditCasesForm({ cases }) {
               </div>
             </div>
 
-
       </div>
-      <div className="mt-6 flex justify-end gap-4">
+      </div>
+      <div className="sticky bottom-0 mt-6 flex justify-end gap-4 rounded-xl border border-slate-200 bg-white/95 p-3 backdrop-blur">
         <Link
           to="/dashboard/casos"
           className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200">
           Cancelar
         </Link>
-        <Button type="submit">Actualizar Casos</Button>
+        <Button type="submit">Guardar cambios</Button>
       </div>
     </form>
   );

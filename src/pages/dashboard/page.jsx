@@ -1,5 +1,5 @@
 
-import React, { Suspense, useEffect } from "react"
+import React, { Suspense, useEffect, useMemo } from "react"
 import Layout from "./layout"
 import { CardsSkeleton, LatestInvoicesSkeleton, RevenueChartSkeleton } from "../../ui/skeleton"
 import LatestInvoices from "../../ui/dashboard/latest-invoices"
@@ -18,30 +18,43 @@ const Dashboard =() =>{
     (state) => state.Refrestoken
     );
     useEffect(() => {
-        const fetch = () => {
-            PostCasosDashboard({token:accessToken});
-        };
-        fetch();
-    }, []);
+        if (!accessToken) return;
+        PostCasosDashboard({token:accessToken});
+    }, [accessToken]);
+
+    const cardStats = useMemo(() => ([
+        { title: "Total de casos", value: metrics.totalCases, type: "collected", subtitle: "Total operativo actual" },
+        { title: "Casos pendientes", value: metrics.pendingCases, type: "pending", subtitle: "Requieren gestión prioritaria" },
+        { title: "Casos cerrados", value: metrics.totalCerrados, type: "invoices", subtitle: "Resueltos correctamente" },
+        { title: "Casos eliminados", value: metrics.totalDelete, type: "customers", subtitle: "Archivados o descartados" },
+    ]), [metrics]);
 
 
     const fillCotent =() =>{
         if(error) return <Error/>
         if(loading) return  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"><CardsSkeleton /></div> 
         return  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    <Card title="Total de casos" value={metrics.totalCases} type="collected" />
-                    <Card title="Casos pendientes" value={metrics.pendingCases} type="pending" />
-                    <Card title="Casos cerrados" value={metrics.totalCerrados} type="invoices" />
-                    <Card title="Casos eliminados" value={metrics.totalDelete} type="customers" />
+                    {cardStats.map((card) => (
+                        <Card
+                            key={card.title}
+                            title={card.title}
+                            value={card.value}
+                            type={card.type}
+                            subtitle={card.subtitle}
+                        />
+                    ))}
                 </div>
     }    
 
     return <>
             <Layout>
             <main>
-                <h1 className={`lusitana mb-4 text-xl md:text-2xl`}>
+                <h1 className={`lusitana mb-2 text-xl font-semibold text-slate-900 md:text-3xl`}>
                     Dashboard
                 </h1>
+                <p className="mb-6 text-sm text-slate-500 md:text-base">
+                    Panel de estadísticas y rendimiento general de la operación.
+                </p>
                 {fillCotent()}
                 <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
                     <Suspense fallback={<RevenueChartSkeleton />} >

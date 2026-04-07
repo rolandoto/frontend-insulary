@@ -11,11 +11,7 @@ const UpadateAmparos =() =>{
     const {PostAmparosById}  = ActionsAmparos()
     const {amparosById,amparosError,isLoadingAmparos } = useSelector((state) => state.amparos);
     const dispatch = useDispatch();
-    const LazyTable = React.lazy(() =>
-            new Promise((resolve) => {
-                setTimeout(() => resolve(import("../../../ui/amparos/editAmparosForm")), 500);
-            })
-    );
+    const LazyTable = React.lazy(() => import("../../../ui/amparos/editAmparosForm"));
 
     const { accessToken} = useSelector(
             (state) => state.Refrestoken);

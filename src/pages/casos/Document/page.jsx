@@ -8,11 +8,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import Error from "../../../ui/Error";
 
-const LazyTable = React.lazy(() =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve(import("../../../ui/casos/tableDocument")), 500);
-  })
-);
+const LazyTable = React.lazy(() => import("../../../ui/casos/tableDocument"));
 
 const DocumentCases =() =>{
     const {PostCasosDocument,PostDocument} = ActionsClient();
