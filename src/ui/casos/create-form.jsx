@@ -40,6 +40,9 @@ export default function Form( ) {
             fetchAmparos({query:"",token:accessToken})
         }, [dispatch]);
   
+
+  console.log(message)
+
   return (
    <form action={formAction}>
     <Toaster richColors position="top-center" />
@@ -104,13 +107,13 @@ export default function Form( ) {
     htmlFor="branchId"
     className="mb-2 block text-sm font-medium"
   >
-    Sucursal <span className="text-red-500">*</span>
+    Sucursal 
   </label>
   <div className="relative">
     <select
       id="branchId"
       name="branchId"
-      required
+
       className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
       aria-describedby="branch-error"
     >
@@ -130,14 +133,7 @@ export default function Form( ) {
     </select>
     <HiOutlineUserCircle className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
   </div>
-  <div id="branch-error" aria-live="polite" aria-atomic="true">
-    {message.errors?.branchId &&
-      message.errors.branchId.map((error) => (
-        <p className="mt-2 text-sm text-red-500" key={error}>
-          {error}
-        </p>
-      ))}
-  </div>
+ 
 </div>
 
     <div className="mb-4">

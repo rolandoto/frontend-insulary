@@ -630,6 +630,7 @@ export async function createbranches(token,prevState, formData) {
   const branches= FormSchemaCases.omit({ id: true, 
                                           date: true,
                                           litisoft:true,
+                                          branchId:true,
                                           referencia_uib:true,
                                           nombre_tercero:true,
                                           apoderado:true,
