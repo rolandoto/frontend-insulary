@@ -4,7 +4,7 @@ import { CiUser } from "react-icons/ci";
 import { Link } from "react-router";
 import { Button } from "../button";
 import {  createCases } from "../../lib/actions";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useMemo, useState } from "react";
 import { Toaster } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineUserCircle } from "react-icons/hi2";
@@ -31,6 +31,23 @@ export default function Form( ) {
     const dispatch = useDispatch();
      const [message, formAction, isPending] = useActionState(createWithToken,initialState);
     const {fetchRamos,fetchAmparos} =ActionsRamos()
+    const [dates, setDates] = useState({
+      fechaSiniestro_tomador: "",
+      fechaAviso_tomador: "",
+      fechaAsignacion_tomador: "",
+    });
+    const today = useMemo(() => new Date().toISOString().split("T")[0], []);
+    const openDatePicker = (event) => {
+      event.target.showPicker?.();
+    };
+    const formatDate = (value) =>
+      value
+        ? new Intl.DateTimeFormat("es-CO", {
+            year: "numeric",
+            month: "long",
+            day: "2-digit",
+          }).format(new Date(`${value}T00:00:00`))
+        : "Sin fecha seleccionada";
 
       useEffect(() => {
             PostClient({query:"",currentPage:1,token:accessToken}),
@@ -608,8 +625,14 @@ export default function Form( ) {
           id="fechaSiniestro_tomador"
           name="fechaSiniestro_tomador"
           type="date"
-          placeholder="Ingrese la fecha del siniestro"
-          className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-1 placeholder:text-gray-500"
+          max={today}
+          value={dates.fechaSiniestro_tomador}
+          onChange={(event) =>
+            setDates((prev) => ({ ...prev, fechaSiniestro_tomador: event.target.value }))
+          }
+          onFocus={openDatePicker}
+          onClick={openDatePicker}
+          className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 pr-10 text-sm outline-1 placeholder:text-gray-500"
           aria-describedby="fechaSiniestro-error"
         />
         <CiUser className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -623,6 +646,9 @@ export default function Form( ) {
             </p>
           ))}
       </div>
+      <p className="mt-1 text-xs text-slate-500">
+        Seleccionada: {formatDate(dates.fechaSiniestro_tomador)}
+      </p>
     </div>
     <div className="mb-4">
       <label htmlFor="fechaAviso_tomador" className="mb-2 block text-sm font-medium">
@@ -633,8 +659,15 @@ export default function Form( ) {
           id="fechaAviso_tomador"
           name="fechaAviso_tomador"
           type="date"
-          placeholder="Ingrese la fecha de aviso"
-          className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-1 placeholder:text-gray-500"
+          min={dates.fechaSiniestro_tomador || undefined}
+          max={today}
+          value={dates.fechaAviso_tomador}
+          onChange={(event) =>
+            setDates((prev) => ({ ...prev, fechaAviso_tomador: event.target.value }))
+          }
+          onFocus={openDatePicker}
+          onClick={openDatePicker}
+          className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 pr-10 text-sm outline-1 placeholder:text-gray-500"
           aria-describedby="fechaAviso-error"
         />
         <CiUser className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -648,6 +681,9 @@ export default function Form( ) {
             </p>
           ))}
       </div>
+      <p className="mt-1 text-xs text-slate-500">
+        Seleccionada: {formatDate(dates.fechaAviso_tomador)}
+      </p>
     </div>
     <div className="mb-4">
       <label htmlFor="fechaAsignacion_tomador" className="mb-2 block text-sm font-medium">
@@ -658,8 +694,15 @@ export default function Form( ) {
           id="fechaAsignacion_tomador"
           name="fechaAsignacion_tomador"
           type="date"
-          placeholder="Ingrese la fecha de asignación"
-          className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-1 placeholder:text-gray-500"
+          min={dates.fechaAviso_tomador || dates.fechaSiniestro_tomador || undefined}
+          max={today}
+          value={dates.fechaAsignacion_tomador}
+          onChange={(event) =>
+            setDates((prev) => ({ ...prev, fechaAsignacion_tomador: event.target.value }))
+          }
+          onFocus={openDatePicker}
+          onClick={openDatePicker}
+          className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 pr-10 text-sm outline-1 placeholder:text-gray-500"
           aria-describedby="fechaAsignacion-error"
         />
         <CiUser className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -673,6 +716,9 @@ export default function Form( ) {
             </p>
           ))}
       </div>
+      <p className="mt-1 text-xs text-slate-500">
+        Seleccionada: {formatDate(dates.fechaAsignacion_tomador)}
+      </p>
     </div>
 
  <div id="detalle-final" className="relative flex items-center justify-center lg:col-span-2">
