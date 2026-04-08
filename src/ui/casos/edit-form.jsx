@@ -3,7 +3,7 @@ import { CiUser } from "react-icons/ci";
 import { Link } from "react-router";
 import { Button } from "../button";
 import { updateCasos } from "../../lib/actions";
-import { useActionState } from "react";
+import { useActionState, useMemo, useState } from "react";
 import { Toaster } from "sonner";
 import {useSelector } from "react-redux";
 import { HiOutlineUserCircle } from "react-icons/hi2";
@@ -22,15 +22,46 @@ export default function EditCasesForm({ cases }) {
     const updateInvoiceWithId = updateCasos.bind(null,cases.id,accessToken);
     const [message, formAction, isPending] = useActionState(updateInvoiceWithId,initialState);
 
-    const fechaSiniestro = new Date(cases.fecha_siniestro);
-    const fechaaviso = new Date(cases.fecha_aviso);
-    const fechaAsignacion = new Date(cases.fecha_asignacion);
+    const initialDates = useMemo(
+      () => ({
+        fechaSiniestro_tomador: cases?.fecha_siniestro?.split("T")?.[0] || "",
+        fechaAviso_tomador: cases?.fecha_aviso?.split("T")?.[0] || "",
+        fechaAsignacion_tomador: cases?.fecha_asignacion?.split("T")?.[0] || "",
+      }),
+      [cases]
+    );
+    const [dates, setDates] = useState(initialDates);
+    const today = useMemo(() => new Date().toISOString().split("T")[0], []);
+    const openDatePicker = (event) => {
+      event.target.showPicker?.();
+    };
+    const formatDate = (value) =>
+      value
+        ? new Intl.DateTimeFormat("es-CO", {
+            year: "numeric",
+            month: "long",
+            day: "2-digit",
+          }).format(new Date(`${value}T00:00:00`))
+        : "Sin fecha seleccionada";
 
   return (
     <form action={formAction}>
         <Toaster richColors position="top-center" />
-        <div className="rounded-md bg-gray-50 p-4 md:p-6">
-        <div className="mb-4">
+        <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:p-6">
+        <div className="mb-6 rounded-xl border border-slate-200 bg-slate-50 p-4">
+          <h2 className="text-lg font-semibold text-slate-800">Actualizar caso</h2>
+          <p className="mt-1 text-sm text-slate-500">
+            Revisa y ajusta los datos por bloques para validar la información sin perder contexto.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium">
+            <a href="#datos-caso" className="rounded-full bg-white px-3 py-1 text-slate-600 ring-1 ring-slate-200 hover:bg-slate-100">Datos del caso</a>
+            <a href="#asegurado" className="rounded-full bg-white px-3 py-1 text-slate-600 ring-1 ring-slate-200 hover:bg-slate-100">Asegurado</a>
+            <a href="#tomador" className="rounded-full bg-white px-3 py-1 text-slate-600 ring-1 ring-slate-200 hover:bg-slate-100">Tomador</a>
+            <a href="#detalle-final" className="rounded-full bg-white px-3 py-1 text-slate-600 ring-1 ring-slate-200 hover:bg-slate-100">Detalle final</a>
+          </div>
+        </div>
+        <div className="grid gap-4 lg:grid-cols-2">
+        <div id="datos-caso" className="mb-4">
           <label htmlFor="clientId" className="mb-2 block text-sm font-medium">
             Cliente / Aseguradora 
           </label>
@@ -210,7 +241,7 @@ export default function EditCasesForm({ cases }) {
           </div>
         </div>
     
-        <div className="relative flex items-center justify-center">
+        <div id="asegurado" className="relative flex items-center justify-center lg:col-span-2">
           <div className="flex-grow border-t border-black"></div>
             <span className="mx-4 bg-white px-3 text-sm font-medium text-black">ASEGURADO</span>
           <div className="flex-grow border-t border-black"></div>
@@ -460,7 +491,7 @@ export default function EditCasesForm({ cases }) {
         </div>
     
         
-        <div className="relative flex items-center justify-center">
+        <div id="tomador" className="relative flex items-center justify-center lg:col-span-2">
             <div className="flex-grow border-t border-black"></div>
               <span className="mx-4 bg-white px-3 text-sm font-medium text-black">TOMADOR</span>
             <div className="flex-grow border-t border-black"></div>
@@ -627,10 +658,15 @@ export default function EditCasesForm({ cases }) {
               id="fechaSiniestro_tomador"
               name="fechaSiniestro_tomador"
               type="date"
-              placeholder="Ingrese la fecha del siniestro"
-              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-1 placeholder:text-gray-500"
+              max={today}
+              value={dates.fechaSiniestro_tomador}
+              onChange={(event) =>
+                setDates((prev) => ({ ...prev, fechaSiniestro_tomador: event.target.value }))
+              }
+              onFocus={openDatePicker}
+              onClick={openDatePicker}
+              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 pr-10 text-sm outline-1 placeholder:text-gray-500"
               aria-describedby="fechaSiniestro-error"
-              defaultValue={fechaSiniestro.toISOString().split("T")[0]}
             />
             <CiUser className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
            <MdOutlineDateRange color="black"  className="pointer-events-none absolute right-1 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -643,6 +679,9 @@ export default function EditCasesForm({ cases }) {
                 </p>
               ))}
           </div>
+          <p className="mt-1 text-xs text-slate-500">
+            Seleccionada: {formatDate(dates.fechaSiniestro_tomador)}
+          </p>
         </div>
         <div className="mb-4">
           <label htmlFor="fechaAviso_tomador" className="mb-2 block text-sm font-medium">
@@ -653,10 +692,16 @@ export default function EditCasesForm({ cases }) {
               id="fechaAviso_tomador"
               name="fechaAviso_tomador"
               type="date"
-              placeholder="Ingrese la fecha de aviso"
-              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-1 placeholder:text-gray-500"
+              min={dates.fechaSiniestro_tomador || undefined}
+              max={today}
+              value={dates.fechaAviso_tomador}
+              onChange={(event) =>
+                setDates((prev) => ({ ...prev, fechaAviso_tomador: event.target.value }))
+              }
+              onFocus={openDatePicker}
+              onClick={openDatePicker}
+              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 pr-10 text-sm outline-1 placeholder:text-gray-500"
               aria-describedby="fechaAviso-error"
-              defaultValue={fechaaviso.toISOString().split("T")[0]}
             />
             <CiUser className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             <MdOutlineDateRange color="black"  className="pointer-events-none absolute right-1 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -669,6 +714,9 @@ export default function EditCasesForm({ cases }) {
                 </p>
               ))}
           </div>
+          <p className="mt-1 text-xs text-slate-500">
+            Seleccionada: {formatDate(dates.fechaAviso_tomador)}
+          </p>
         </div>
         <div className="mb-4">
           <label htmlFor="fechaAsignacion_tomador" className="mb-2 block text-sm font-medium">
@@ -679,10 +727,16 @@ export default function EditCasesForm({ cases }) {
               id="fechaAsignacion_tomador"
               name="fechaAsignacion_tomador"
               type="date"
-              placeholder="Ingrese la fecha de asignación"
-              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-1 placeholder:text-gray-500"
+              min={dates.fechaAviso_tomador || dates.fechaSiniestro_tomador || undefined}
+              max={today}
+              value={dates.fechaAsignacion_tomador}
+              onChange={(event) =>
+                setDates((prev) => ({ ...prev, fechaAsignacion_tomador: event.target.value }))
+              }
+              onFocus={openDatePicker}
+              onClick={openDatePicker}
+              className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 pr-10 text-sm outline-1 placeholder:text-gray-500"
               aria-describedby="fechaAsignacion-error"
-              defaultValue={fechaAsignacion.toISOString().split("T")[0]}
             />
             <CiUser className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
              <MdOutlineDateRange color="black"  className="pointer-events-none absolute right-1 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -695,10 +749,14 @@ export default function EditCasesForm({ cases }) {
                 </p>
               ))}
           </div>
+          <p className="mt-1 text-xs text-slate-500">
+            Seleccionada: {formatDate(dates.fechaAsignacion_tomador)}
+          </p>
         </div>
     
-     <div className="relative flex items-center justify-center">
+     <div id="detalle-final" className="relative flex items-center justify-center lg:col-span-2">
             <div className="flex-grow border-t border-black"></div>
+              <span className="mx-4 bg-white px-3 text-sm font-medium text-black">DETALLE FINAL</span>
             <div className="flex-grow border-t border-black"></div>
         </div>
     
@@ -1043,15 +1101,15 @@ export default function EditCasesForm({ cases }) {
               </div>
             </div>
 
-
       </div>
-      <div className="mt-6 flex justify-end gap-4">
+      </div>
+      <div className="sticky bottom-0 mt-6 flex justify-end gap-4 rounded-xl border border-slate-200 bg-white/95 p-3 backdrop-blur">
         <Link
           to="/dashboard/casos"
           className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200">
           Cancelar
         </Link>
-        <Button type="submit">Actualizar Casos</Button>
+        <Button type="submit">Guardar cambios</Button>
       </div>
     </form>
   );

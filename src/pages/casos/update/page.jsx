@@ -23,11 +23,7 @@ export default function UpadateCases( ) {
     const {PostBranches} =   ActionsBranches()
 
 
-    const LazyTable = React.lazy(() =>
-        new Promise((resolve) => {
-          setTimeout(() => resolve(import("../../../ui/casos/edit-form")), 500);
-        })
-      );
+    const LazyTable = React.lazy(() => import("../../../ui/casos/edit-form"));
 
         useEffect(() => {
                 PostCasesById({id,token:accessToken}); // asegúrate de que esto sea un thunk
@@ -55,8 +51,7 @@ export default function UpadateCases( ) {
 
   return (
           <Layout>
-           
-            <main>
+            <main className="w-full">
                 <Breadcrumbs
                     breadcrumbs={[
                     { label: 'Casos', href: '/dashboard/casos' },
@@ -66,6 +61,12 @@ export default function UpadateCases( ) {
                         active: true,},
                     ]}
                 />
+                <div className="mb-4 mt-2 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                  <h1 className="text-2xl font-semibold text-slate-900">Actualizar caso</h1>
+                  <p className="mt-1 text-sm text-slate-500">
+                    Edita la información por secciones para que todo sea más rápido, claro y fácil de validar.
+                  </p>
+                </div>
             </main>
             {fillContent()}            
         </Layout>
