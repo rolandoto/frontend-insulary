@@ -3,7 +3,7 @@ import { CiUser } from "react-icons/ci";
 import { Link } from "react-router";
 import { Button } from "../button";
 import { updateCasos } from "../../lib/actions";
-import { useActionState, useMemo, useState } from "react";
+import { useActionState, useEffect, useMemo, useState } from "react";
 import { Toaster } from "sonner";
 import {useSelector } from "react-redux";
 import { HiOutlineUserCircle } from "react-icons/hi2";
@@ -17,7 +17,7 @@ export default function EditCasesForm({ cases }) {
     const {branchesFilter}= useSelector((state) => state.branches)
     const {ClientFilter,casosEstados} = useSelector((state) => state.clients);
     const {ramos,amparosFilter}= useSelector((state) => state.ramos)
-    const {loading,intermediariesFilter}= useSelector((state) => state.intermederies)
+    const {intermediariesFilter}= useSelector((state) => state.intermederies)
     const initialState ={message:"",errors:{}};
     const updateInvoiceWithId = updateCasos.bind(null,cases.id,accessToken);
     const [message, formAction, isPending] = useActionState(updateInvoiceWithId,initialState);
@@ -31,6 +31,52 @@ export default function EditCasesForm({ cases }) {
       [cases]
     );
     const [dates, setDates] = useState(initialDates);
+    const [selectedClientId, setSelectedClientId] = useState(
+      cases?.idcliente?.toString?.() || ""
+    );
+    const [selectedBranchId, setSelectedBranchId] = useState(
+      (
+        cases?.idsucursal ??
+        cases?.idbranch ??
+        cases?.id_sucursal ??
+        cases?.branchId
+      )?.toString?.() || ""
+    );
+    const [selectedIntermediaryId, setSelectedIntermediaryId] = useState(
+      cases?.idintermediario?.toString?.() || ""
+    );
+
+    useEffect(() => {
+      setDates(initialDates);
+    }, [initialDates]);
+
+    useEffect(() => {
+      setSelectedClientId(cases?.idcliente?.toString?.() || "");
+      setSelectedBranchId(
+        (
+          cases?.idsucursal ??
+          cases?.idbranch ??
+          cases?.id_sucursal ??
+          cases?.branchId
+        )?.toString?.() || ""
+      );
+      setSelectedIntermediaryId(cases?.idintermediario?.toString?.() || "");
+    }, [cases]);
+
+    const filteredBranches = useMemo(() => {
+      if (!selectedClientId) return [];
+      return branchesFilter.filter(
+        (branch) => branch?.clientId?.toString?.() === selectedClientId
+      );
+    }, [branchesFilter, selectedClientId]);
+
+    const hasSelectedBranch = useMemo(
+      () =>
+        filteredBranches.some(
+          (branch) => branch?.id?.toString?.() === selectedBranchId
+        ),
+      [filteredBranches, selectedBranchId]
+    );
     const today = useMemo(() => new Date().toISOString().split("T")[0], []);
     const openDatePicker = (event) => {
       event.target.showPicker?.();
@@ -71,25 +117,12 @@ export default function EditCasesForm({ cases }) {
               name="clientId"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               aria-describedby="client-error"
-              defaultValue={cases.idcliente}
+              value={selectedClientId}
               onChange={(e) => {
-                // Filtrar sucursales cuando cambie el cliente
-                const selectedClientId = e.target.value;
-                const branchSelect = document.getElementById('branchId');
-                const intermediarySelect = document.getElementById('intermediaryId');
-                
-                branchSelect.value = '';
-                intermediarySelect.value = '';
-                
-                const branchOptions = branchSelect.querySelectorAll('option:not(:first-child)');
-                branchOptions.forEach(option => {
-                  const branch = branchesFilter.find(b => b.id.toString() === option.value);
-                  if (branch && branch.id.toString() === selectedClientId) {
-                    option.style.display = 'block';
-                  } else {
-                    option.style.display = 'none';
-                  }
-                });
+                const nextClientId = e.target.value;
+                setSelectedClientId(nextClientId);
+                setSelectedBranchId("");
+                setSelectedIntermediaryId("");
               }}
             >
               <option value="" disabled>
@@ -156,16 +189,17 @@ export default function EditCasesForm({ cases }) {
               name="branchId"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               aria-describedby="branch-error"
+              value={hasSelectedBranch ? selectedBranchId : ""}
+              onChange={(e) => setSelectedBranchId(e.target.value)}
             >
               <option value="" disabled>
                 Seleccione la sucursal
               </option>
-              {branchesFilter.map((branch,e) => (
+              {filteredBranches.map((branch,e) => (
                 <option 
                   key={e} 
                   value={branch.id}
                   data-client-id={branch.clientId}
-                  style={{display: 'none'}} // Inicialmente ocultas
                 >
                   {branch.nombre}
                 </option>
@@ -193,7 +227,8 @@ export default function EditCasesForm({ cases }) {
               name="intermediaryId"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               aria-describedby="intermediary-error"
-              defaultValue={cases.idintermediario}
+              value={selectedIntermediaryId}
+              onChange={(e) => setSelectedIntermediaryId(e.target.value)}
             >
               <option value="" disabled>
                 Seleccione el intermediario

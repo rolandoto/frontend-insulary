@@ -17,7 +17,7 @@ export default function UpadateCases( ) {
     const { id } = useParams();
     const { PostCasesById ,PostClient,PostCasosEstados} = ActionsClient();
     const { accessToken } = useSelector((state) => state.Refrestoken);
-    const { loading,casosById, isLoadingCasos, casosError } = useSelector((state) => state.clients);
+    const { casosById, isLoadingCasos, casosError } = useSelector((state) => state.clients);
     const {fetchRamos,fetchAmparos} =ActionsRamos()
     const  {PostIntermederies} =ActionsIntermederies()
     const {PostBranches} =   ActionsBranches()
@@ -26,15 +26,15 @@ export default function UpadateCases( ) {
     const LazyTable = React.lazy(() => import("../../../ui/casos/edit-form"));
 
         useEffect(() => {
+                if (!accessToken || !id) return;
                 PostCasesById({id,token:accessToken}); // asegúrate de que esto sea un thunk
                 PostClient({query:"",currentPage:1,token:accessToken})
-                PostIntermederies({query:"",currentPage:1,token:accessToken})
                 PostIntermederies({query:"",currentPage:1,token:accessToken})
                 PostBranches({query:"",currentPage:1,token:accessToken})
                 fetchRamos({query:"",token:accessToken})
                 fetchAmparos({query:"",token:accessToken})
                 PostCasosEstados({query:"",token:accessToken})
-          }, []);
+          }, [id, accessToken]);
 
     const fillContent =() =>{
         if(isLoadingCasos){
