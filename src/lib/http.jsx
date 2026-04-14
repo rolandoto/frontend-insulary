@@ -1,8 +1,10 @@
+import { config } from "../Config/Config";
+
 // lib/data.ts
 
 const fetchClient = async () => {
     try {
-        const resp = await fetch(`http://localhost:3001/api/client/GetClient`, {
+        const resp = await fetch(`${config.serverRoute}/api/client/GetClient`, {
           method: "GET",
           headers: {
             'Content-type': 'application/json'
