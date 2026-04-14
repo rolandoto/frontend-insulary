@@ -132,7 +132,7 @@ export function CreateInvoice() {
   export function UpdateInvoice({ id }) {
     return (
       <Link
-        href="/dashboard/invoices" 
+        to="/dashboard/invoices" 
         className="rounded-md border border-gray-200 p-2 hover:bg-gray-100"
       >
         <HiOutlinePencil fontSize={25} className="w-5" />

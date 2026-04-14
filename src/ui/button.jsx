@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useActionState, useRef, useState } from 'react';
 import { Toaster } from 'sonner';
 import { CiPower } from "react-icons/ci";
+import { useNavigate } from 'react-router';
 
 export function Button({ children, className,...rest }) {
   return (
@@ -36,12 +37,21 @@ export function DeleteCasos({ id }) {
 
 export function Logout() {
   const { accessToken} = useSelector((state) => state.Refrestoken);  
-  const logoutUserWithId = logoutUser.bind(null,accessToken);
+  const navigate = useNavigate();
+
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    const response = await logoutUser(accessToken);
+
+    if (response?.success) {
+      navigate('/');
+    }
+  };
  
 
   return (
     <>
-      <form action={logoutUserWithId} >
+      <form onSubmit={handleLogout} >
           <button className="flex h-[48px] Lusitana text-black w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
             <CiPower fontSize={35} className="w-6" />
             <div className=" cursor-pointer hidden md:block">Cerrar sesión</div>

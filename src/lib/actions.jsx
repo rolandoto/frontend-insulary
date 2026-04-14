@@ -1210,11 +1210,6 @@ export async function logoutUser(token) {
 
     toast.success("Sesión cerrada correctamente ✅");
 
-    // Opcional: redirigir al login
-    setTimeout(() => {
-      window.location.href = "/";
-    }, 1000);
-
     return {
       success: true,
       message: "Sesión cerrada correctamente",

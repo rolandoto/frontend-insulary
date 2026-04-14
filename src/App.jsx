@@ -1,4 +1,4 @@
-import { Routes, Route,BrowserRouter } from "react-router"
+import { Routes, Route, BrowserRouter } from "react-router"
 import './App.css'
 import Dashboard from './pages/dashboard/page'
 import Invoince from './pages/invoince/page'
@@ -39,13 +39,13 @@ function App() {
   return (
     <Provider  store={store}>
       <AppWrapper>
-          <BrowserRouter>
+          <BrowserRouter basename="/silov/silic/">
               <Routes>
                 <Route  path='/' element={ < PublicRoute><LoginPage /></PublicRoute>  } />
                 <Route  path='/ConfirmeCode' element={ < PublicRoute><ConfirmCodePage /></PublicRoute>  } />
                 <Route path='/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute> } />
                 <Route path='/dashboard/customers' element={<PrivateRoute><Customers /></PrivateRoute> } />
-                <Route path='dashboard/customers/create' element={ <PrivateRoute><CreateForm /></PrivateRoute> } />
+                <Route path='/dashboard/customers/create' element={ <PrivateRoute><CreateForm /></PrivateRoute> } />
                 <Route path='/dashboard/customers/:id/edit' element={ <PrivateRoute><UpadateCustomers /></PrivateRoute>} />
                 <Route path='/dashboard/invoices' element={ <PrivateRoute><Invoince /></PrivateRoute>} />
                 <Route path='/dashboard/casos' element={<PrivateRoute><Casos /></PrivateRoute>} />

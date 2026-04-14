@@ -39,6 +39,8 @@ const LATEST_INVOICES = [
   },
 ];
 
+const withBaseUrl = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+
 function LatestInvoicesComponent() {
   return (
     <section className="flex w-full flex-col md:col-span-4">
@@ -56,7 +58,7 @@ function LatestInvoicesComponent() {
             >
               <div className="flex items-center">
                 <img
-                  src={invoice.image_url}
+                  src={withBaseUrl(invoice.image_url)}
                   alt={`${invoice.name}'s profile picture`}
                   className="mr-4 h-12 w-12 rounded-full object-cover"
                   loading="lazy"
