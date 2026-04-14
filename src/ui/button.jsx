@@ -44,7 +44,8 @@ export function Logout() {
     const response = await logoutUser(accessToken);
 
     if (response?.success) {
-      navigate('/',{ replace: true });
+      navigate('/login',{ replace: true });
+      window.location.reload()
     }
   };
  
