@@ -44,7 +44,7 @@ export function Logout() {
     const response = await logoutUser(accessToken);
 
     if (response?.success) {
-      navigate('/');
+      navigate('/',{ replace: true });
     }
   };
  
